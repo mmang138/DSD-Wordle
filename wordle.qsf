@@ -47,5 +47,31 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name VERILOG_FILE wordle.v
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR "C:/Users/Maria/Documents/DSD-Wordle/simulation/qsim/" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
+set_location_assignment PIN_J6 -to switch_input[0]
+set_location_assignment PIN_H5 -to switch_input[1]
+set_location_assignment PIN_H6 -to switch_input[2]
+set_location_assignment PIN_G4 -to switch_input[3]
+set_location_assignment PIN_G5 -to switch_input[4]
+set_location_assignment PIN_D2 -to switch_input[9]
+set_location_assignment PIN_E4 -to switch_input[8]
+set_location_assignment PIN_E3 -to switch_input[7]
+set_location_assignment PIN_H7 -to switch_input[6]
+set_location_assignment PIN_J7 -to switch_input[5]
+set_location_assignment PIN_E11 -to sevenSegmentActiveLow[6]
+set_location_assignment PIN_F11 -to sevenSegmentActiveLow[5]
+set_location_assignment PIN_H12 -to sevenSegmentActiveLow[4]
+set_location_assignment PIN_H13 -to sevenSegmentActiveLow[3]
+set_location_assignment PIN_G12 -to sevenSegmentActiveLow[2]
+set_location_assignment PIN_F12 -to sevenSegmentActiveLow[1]
+set_location_assignment PIN_F13 -to sevenSegmentActiveLow[0]
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
