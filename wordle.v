@@ -28,19 +28,19 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	reg enter_old, B;
 	
 	initial begin
-	UG1 = 10'b0;
-	UG2 = 10'b0;
-	UG3 = 10'b0;
-	UG4 = 10'b0;
-	LED1 = 0; LED2 = 0; LED3 = 0; LED4 = 0;
+	UG1 = 10'b0000000000;
+	UG2 = 10'b0000000000;
+	UG3 = 10'b0000000000;
+	UG4 = 10'b0000000000;
+	LED1 = 1; LED2 = 1; LED3 = 1; LED4 = 1;
 	B = 0;
 	enter_old = 0;
-	SS1 = 7'b1;
-	SS2 = 7'b1;
-	SS3 = 7'b1;
-	SS4 = 7'b1;	
+	SS1 = 7'b1111111;
+	SS2 = 7'b1111111;
+	SS3 = 7'b1111111;
+	SS4 = 7'b1111111;	
 	state= s0;
-	count = 3'b0;
+	count = 3'b000;
 	end
 
 
@@ -53,32 +53,24 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 		if (B == 1) begin
 			B <= 0;
 			case (state)
+				// reset state
 				s0: begin 
-						// reset seven segments
-						SS1 <= 7'b11111111;  
-						SS2 <= 7'b11111111; 
-						SS3 <= 7'b11111111;
-						SS4 <= 7'b11111111; 
 						next_state <= s1;
-						end
+						end 
 				s1: begin 
-						UG1 = switch_input;
-						SS1 <= sevenSegment;
+						UG1 <= sevenSegment;
 						next_state <= s2;
 						end
 				s2: begin 
-						UG2 = switch_input;
-						SS2 <= sevenSegment;
+						UG2 <= sevenSegment;
 						next_state <= s3;
 						end
-				s3: begin 
-						UG3 = switch_input;
-						SS3 <= sevenSegment;
+				s3: begin
+						UG3 <= sevenSegment;
 						next_state <= s4;
 						end
 				s4: begin 
-						UG4 = switch_input;
-						SS4 <= sevenSegment;
+						UG4 <= sevenSegment;
 						next_state <= s5;
 						end
 				s5:begin 
@@ -89,49 +81,17 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 							else begin
 								next_state <= s6;
 							end
-							
-						end else if (count == 5)begin
+						end else if (count >= 5)begin
 							next_state <= s8;
 						end
 						end // case
 				s6: begin
-						count = count +1;
-						if (UG1==SW1)begin
-							LED1 <= 1;
-						end
-						if (UG2==SW2)begin
-							LED2 <= 1;
-						end
-						if (UG3==SW3)begin
-							LED3 <= 1;
-						end
-						if (UG4==SW4)begin
-							LED4 <= 1;
-						end
-						next_state <= s0;
-						
+						count <= count +1;
+						next_state <= s1;
 						end // case
-				s7: begin
-							next_state <= s0;
-							SS1 <= 7'b1001001; // W
-							SS2 <= 7'b1001111; // I
-							SS3 <= 7'b1011010; // N
-							SS4 <= 7'b0100100; // S
-						end // case
-				s8:begin
-							next_state <= s9;
-							SS1 <= 7'b1110001; // L
-							SS2 <= 7'b0000001; // O
-							SS3 <= 7'b0100100; // S
-							SS4 <= 7'b0110000; // E
-						end // case
-				s9: begin 
-							next_state <= s0;
-							SS1 <= 7'b1100000; // B
-							SS2 <= 7'b1001111; // I
-							SS3 <= 7'b1001110; // T
-							SS4 <= 7'b0100100; // S
-						end 
+				s7: next_state <= s0;
+				s8: next_state <= s9;
+				s9: next_state <= s0; 
 			endcase
 		end // b==1 if statement
 		
@@ -174,5 +134,87 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 			default : sevenSegment = 7'b0000000; // lights up seven segment
 		endcase;	
 	end // always clock
+	
+	always @(state) begin
+    case (state)
+        s0: begin
+            SS1 <= 7'b1111111;  
+            SS2 <= 7'b1111111; 
+            SS3 <= 7'b1111111;
+            SS4 <= 7'b1111111;
+				end
+        s1: begin 
+				SS1 <= sevenSegment;
+				SS2 <= 7'b1111111;
+				SS3 <= 7'b1111111; 
+				SS4 <= 7'b1111111;
+				end
+        s2: begin
+				SS1 <= UG1;
+				SS2 <= sevenSegment;
+				SS3 <= 7'b1111111; 
+				SS4 <= 7'b1111111;
+				end
+        s3: begin
+				SS1 <= UG1;
+				SS2 <= UG2;
+				SS3 <= sevenSegment;
+				SS4 <= 7'b1111111;
+				end
+        s4: begin
+				SS1 <= UG1;
+				SS2 <= UG2;
+				SS3 <= UG3; 
+				SS4 <= sevenSegment;
+				end
+        s6: begin
+				SS1 <= UG1;
+				SS2 <= UG2;
+				SS3 <= UG3;
+            SS4 <= UG4;
+            if (UG1 == SW1) begin 
+					LED1 <= 1;
+				end else begin
+					LED1 <= 0;
+					end
+				
+				if (UG2 == SW2) begin 
+					LED2 <= 1;
+				end else begin
+					LED2 <= 0;
+					end
+				
+				if (UG3 == SW3) begin 
+					LED3 <= 1;
+				end else begin
+					LED3 <= 0;
+					end
+				
+				if (UG4 == SW4) begin 
+					LED4 <= 1;
+				end else begin
+					LED4 <= 0;
+					end
+				end
+        s7: begin
+            SS1 <= 7'b1001001; // W
+            SS2 <= 7'b1001111; // I
+            SS3 <= 7'b1011010; // N
+            SS4 <= 7'b0100100; // S
+				end
+        s8: begin
+            SS1 <= 7'b1110001; // L
+            SS2 <= 7'b0000001; // O
+            SS3 <= 7'b0100100; // S
+            SS4 <= 7'b0110000; // E
+				end
+        s9: begin
+            SS1 <= 7'b1100000; // B
+            SS2 <= 7'b1001111; // I
+            SS3 <= 7'b1001110; // T
+            SS4 <= 7'b0100100; // S
+				end
+    endcase
+end
 				
 endmodule	
