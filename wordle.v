@@ -167,11 +167,17 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 				SS3 <= UG3; 
 				SS4 <= sevenSegment;
 				end
-        s6: begin
+        s4: begin
 				SS1 <= UG1;
 				SS2 <= UG2;
-				SS3 <= UG3;
-            SS4 <= UG4;
+				SS3 <= UG3; 
+				SS4 <= UG4;
+				end
+		  s6: begin
+				SS1 <= 7'b1111111;  
+            SS2 <= 7'b1111111; 
+            SS3 <= 7'b1111111;
+            SS4 <= 7'b1111111;
             if (UG1 == SW1) begin 
 					LED1 <= 1;
 				end else begin

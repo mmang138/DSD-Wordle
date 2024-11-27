@@ -3,111 +3,111 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'state.s5'
-Slack : -4.411
-TNS   : -85.384
+Slack : -3.757
+TNS   : -72.082
 
 Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : -1.449
-TNS   : -137.901
+Slack : -1.550
+TNS   : -119.414
 
 Type  : Slow 1200mV 85C Model Setup 'state.s6'
-Slack : -0.613
-TNS   : -2.317
+Slack : -1.403
+TNS   : -3.046
 
 Type  : Slow 1200mV 85C Model Hold 'state.s5'
-Slack : -0.779
-TNS   : -5.215
+Slack : -0.815
+TNS   : -8.689
 
 Type  : Slow 1200mV 85C Model Hold 'clk'
-Slack : -0.124
-TNS   : -0.300
+Slack : -0.153
+TNS   : -0.561
 
 Type  : Slow 1200mV 85C Model Hold 'state.s6'
-Slack : 0.271
-TNS   : 0.000
+Slack : -0.092
+TNS   : -0.131
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
 Slack : -3.000
 TNS   : -133.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'state.s6'
-Slack : 0.405
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'state.s5'
+Slack : 0.344
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'state.s5'
-Slack : 0.439
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'state.s6'
+Slack : 0.381
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'state.s5'
-Slack : -4.003
-TNS   : -75.467
-
-Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : -1.172
-TNS   : -111.222
+Slack : -3.365
+TNS   : -63.214
 
 Type  : Slow 1200mV 0C Model Setup 'state.s6'
-Slack : -0.581
-TNS   : -2.191
+Slack : -1.316
+TNS   : -2.864
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -1.284
+TNS   : -94.789
 
 Type  : Slow 1200mV 0C Model Hold 'state.s5'
-Slack : -0.667
-TNS   : -4.383
+Slack : -0.719
+TNS   : -7.424
 
 Type  : Slow 1200mV 0C Model Hold 'clk'
-Slack : -0.103
-TNS   : -0.328
+Slack : -0.137
+TNS   : -0.530
 
 Type  : Slow 1200mV 0C Model Hold 'state.s6'
-Slack : 0.383
+Slack : 0.047
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
 TNS   : -133.000
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'state.s6'
-Slack : 0.447
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'state.s5'
+Slack : 0.415
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'state.s5'
-Slack : 0.484
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'state.s6'
+Slack : 0.437
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'state.s5'
-Slack : -2.108
-TNS   : -36.766
-
-Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : -0.411
-TNS   : -27.674
+Slack : -1.748
+TNS   : -28.453
 
 Type  : Fast 1200mV 0C Model Setup 'state.s6'
-Slack : -0.062
-TNS   : -0.165
+Slack : -0.532
+TNS   : -0.952
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -0.495
+TNS   : -17.222
 
 Type  : Fast 1200mV 0C Model Hold 'state.s5'
-Slack : -0.517
-TNS   : -4.032
+Slack : -0.567
+TNS   : -6.820
 
 Type  : Fast 1200mV 0C Model Hold 'clk'
-Slack : -0.204
-TNS   : -0.922
+Slack : -0.218
+TNS   : -1.016
 
 Type  : Fast 1200mV 0C Model Hold 'state.s6'
-Slack : 0.271
+Slack : 0.032
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -140.882
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'state.s6'
-Slack : 0.366
-TNS   : 0.000
+TNS   : -141.808
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'state.s5'
-Slack : 0.399
+Slack : 0.331
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'state.s6'
+Slack : 0.353
 TNS   : 0.000
 
 ------------------------------------------------------------
