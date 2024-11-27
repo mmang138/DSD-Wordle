@@ -1,5 +1,5 @@
 Analysis & Synthesis report for wordle
-Sun Nov 24 21:26:25 2024
+Tue Nov 26 19:40:27 2024
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -15,9 +15,9 @@ Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. State Machine - |wordle|next_state
   9. State Machine - |wordle|state
- 10. User-Specified and Inferred Latches
- 11. Registers Removed During Synthesis
- 12. General Register Statistics
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
  13. Multiplexer Restructuring Statistics (Restructuring Performed)
  14. Parameter Settings for User Entity Instance: Top-level Entity: |wordle
  15. Elapsed Time Per Partition
@@ -48,15 +48,15 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Nov 24 21:26:25 2024      ;
+; Analysis & Synthesis Status        ; Successful - Tue Nov 26 19:40:27 2024      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; wordle                                     ;
 ; Top-level Entity Name              ; wordle                                     ;
 ; Family                             ; Cyclone III                                ;
-; Total logic elements               ; 217                                        ;
-;     Total combinational functions  ; 166                                        ;
-;     Dedicated logic registers      ; 70                                         ;
-; Total registers                    ; 70                                         ;
+; Total logic elements               ; 205                                        ;
+;     Total combinational functions  ; 154                                        ;
+;     Dedicated logic registers      ; 98                                         ;
+; Total registers                    ; 98                                         ;
 ; Total pins                         ; 48                                         ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 0                                          ;
@@ -177,28 +177,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 217       ;
+; Estimated Total logic elements              ; 205       ;
 ;                                             ;           ;
-; Total combinational functions               ; 166       ;
+; Total combinational functions               ; 154       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 95        ;
-;     -- 3 input functions                    ; 55        ;
-;     -- <=2 input functions                  ; 16        ;
+;     -- 4 input functions                    ; 94        ;
+;     -- 3 input functions                    ; 43        ;
+;     -- <=2 input functions                  ; 17        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 166       ;
+;     -- normal mode                          ; 154       ;
 ;     -- arithmetic mode                      ; 0         ;
 ;                                             ;           ;
-; Total registers                             ; 70        ;
-;     -- Dedicated logic registers            ; 70        ;
+; Total registers                             ; 98        ;
+;     -- Dedicated logic registers            ; 98        ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 48        ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 70        ;
-; Total fan-out                               ; 848       ;
-; Average fan-out                             ; 2.55      ;
+; Maximum fan-out                             ; 98        ;
+; Total fan-out                               ; 898       ;
+; Average fan-out                             ; 2.58      ;
 +---------------------------------------------+-----------+
 
 
@@ -207,7 +207,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |wordle                    ; 166 (166)         ; 70 (70)      ; 0           ; 0            ; 0       ; 0         ; 48   ; 0            ; |wordle             ; work         ;
+; |wordle                    ; 154 (154)         ; 98 (98)      ; 0           ; 0            ; 0       ; 0         ; 48   ; 0            ; |wordle             ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -232,60 +232,22 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
-+------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |wordle|state                                                                                                ;
-+-------------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-------------+
-; Name        ; state.s9 ; state.s8 ; state.s7 ; state.s6 ; state.s5 ; state.s4 ; state.s3 ; state.s2 ; state.s1 ; state.00000 ;
-+-------------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-------------+
-; state.00000 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0           ;
-; state.s1    ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 1           ;
-; state.s2    ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 1           ;
-; state.s3    ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 1           ;
-; state.s4    ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 1           ;
-; state.s5    ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 1           ;
-; state.s6    ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1           ;
-; state.s7    ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1           ;
-; state.s8    ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1           ;
-; state.s9    ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1           ;
-+-------------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-------------+
-
-
-+----------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                ;
-+-----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
-+-----------------------------------------------------+---------------------+------------------------+
-; SS1[0]$latch                                        ; SS1[6]              ; yes                    ;
-; SS1[1]$latch                                        ; SS1[6]              ; yes                    ;
-; SS1[2]$latch                                        ; SS1[6]              ; yes                    ;
-; SS1[3]$latch                                        ; SS1[6]              ; yes                    ;
-; SS1[4]$latch                                        ; SS1[6]              ; yes                    ;
-; SS1[5]$latch                                        ; SS1[6]              ; yes                    ;
-; SS1[6]$latch                                        ; SS1[6]              ; yes                    ;
-; SS2[0]$latch                                        ; SS2[6]              ; yes                    ;
-; SS2[1]$latch                                        ; SS2[6]              ; yes                    ;
-; SS2[2]$latch                                        ; SS2[6]              ; yes                    ;
-; SS2[3]$latch                                        ; SS2[6]              ; yes                    ;
-; SS2[4]$latch                                        ; SS2[6]              ; yes                    ;
-; SS2[5]$latch                                        ; SS2[6]              ; yes                    ;
-; SS2[6]$latch                                        ; SS2[6]              ; yes                    ;
-; SS3[0]$latch                                        ; SS3[6]              ; yes                    ;
-; SS3[1]$latch                                        ; SS3[6]              ; yes                    ;
-; SS3[2]$latch                                        ; SS3[6]              ; yes                    ;
-; SS3[3]$latch                                        ; SS3[6]              ; yes                    ;
-; SS3[4]$latch                                        ; SS3[6]              ; yes                    ;
-; SS3[5]$latch                                        ; SS3[6]              ; yes                    ;
-; SS3[6]$latch                                        ; SS3[6]              ; yes                    ;
-; SS4[0]$latch                                        ; SS4[6]              ; yes                    ;
-; SS4[1]$latch                                        ; SS4[6]              ; yes                    ;
-; SS4[2]$latch                                        ; SS4[6]              ; yes                    ;
-; SS4[3]$latch                                        ; SS4[6]              ; yes                    ;
-; SS4[4]$latch                                        ; SS4[6]              ; yes                    ;
-; SS4[5]$latch                                        ; SS4[6]              ; yes                    ;
-; SS4[6]$latch                                        ; SS4[6]              ; yes                    ;
-; Number of user-specified and inferred latches = 28  ;                     ;                        ;
-+-----------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
++------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |wordle|state                                                                                          ;
++----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
+; Name     ; state.s9 ; state.s8 ; state.s7 ; state.s6 ; state.s5 ; state.s4 ; state.s3 ; state.s2 ; state.s1 ; state.s0 ;
++----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
+; state.s0 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ;
+; state.s1 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 1        ;
+; state.s2 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 1        ;
+; state.s3 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 1        ;
+; state.s4 ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 1        ;
+; state.s5 ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s6 ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s7 ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s8 ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s9 ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
++----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
 
 
 +-------------------------------------------------------------+
@@ -293,11 +255,11 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------+--------------------+
 ; Register name                          ; Reason for Removal ;
 +----------------------------------------+--------------------+
+; next_state~12                          ; Lost fanout        ;
+; next_state~13                          ; Lost fanout        ;
 ; next_state~14                          ; Lost fanout        ;
 ; next_state~15                          ; Lost fanout        ;
 ; next_state~16                          ; Lost fanout        ;
-; next_state~17                          ; Lost fanout        ;
-; next_state~18                          ; Lost fanout        ;
 ; state~2                                ; Lost fanout        ;
 ; state~3                                ; Lost fanout        ;
 ; state~4                                ; Lost fanout        ;
@@ -312,14 +274,27 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 70    ;
+; Total registers                              ; 98    ;
 ; Number of registers using Synchronous Clear  ; 1     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 50    ;
+; Number of registers using Clock Enable       ; 78    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; SS1[0]~reg0                            ; 2       ;
+; SS2[0]~reg0                            ; 2       ;
+; SS3[0]~reg0                            ; 2       ;
+; SS4[0]~reg0                            ; 2       ;
+; Total number of inverted registers = 4 ;         ;
++----------------------------------------+---------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------+
@@ -327,7 +302,13 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |wordle|next_state         ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |wordle|SS2[6]~reg0        ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |wordle|SS3[3]~reg0        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |wordle|SS2[4]~reg0        ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |wordle|SS4[1]~reg0        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |wordle|SS1[2]~reg0        ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; No         ; |wordle|next_state         ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |wordle|next_state         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
@@ -365,118 +346,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Sun Nov 24 21:26:23 2024
+    Info: Processing started: Tue Nov 26 19:40:26 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off wordle -c wordle
 Warning (20028): Parallel compilation is not licensed and has been disabled
+Warning (10229): Verilog HDL Expression warning at wordle.v(58): truncated literal to match 7 bits
+Warning (10229): Verilog HDL Expression warning at wordle.v(59): truncated literal to match 7 bits
+Warning (10229): Verilog HDL Expression warning at wordle.v(60): truncated literal to match 7 bits
+Warning (10229): Verilog HDL Expression warning at wordle.v(61): truncated literal to match 7 bits
 Info (12021): Found 1 design units, including 1 entities, in source file wordle.v
     Info (12023): Found entity 1: wordle
 Info (12127): Elaborating entity "wordle" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at wordle.v(102): truncated value with size 32 to match size of target (4)
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(122): inferring latch(es) for variable "SS1", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(122): inferring latch(es) for variable "SS2", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(122): inferring latch(es) for variable "SS3", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(122): inferring latch(es) for variable "SS4", which holds its previous value in one or more paths through the always construct
-Info (10041): Inferred latch for "SS4[0]" at wordle.v(157)
-Info (10041): Inferred latch for "SS4[1]" at wordle.v(157)
-Info (10041): Inferred latch for "SS4[2]" at wordle.v(157)
-Info (10041): Inferred latch for "SS4[3]" at wordle.v(157)
-Info (10041): Inferred latch for "SS4[4]" at wordle.v(157)
-Info (10041): Inferred latch for "SS4[5]" at wordle.v(157)
-Info (10041): Inferred latch for "SS4[6]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[0]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[1]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[2]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[3]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[4]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[5]" at wordle.v(157)
-Info (10041): Inferred latch for "SS3[6]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[0]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[1]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[2]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[3]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[4]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[5]" at wordle.v(157)
-Info (10041): Inferred latch for "SS2[6]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[0]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[1]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[2]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[3]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[4]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[5]" at wordle.v(157)
-Info (10041): Inferred latch for "SS1[6]" at wordle.v(157)
-Warning (13012): Latch SS1[0]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s1
-Warning (13012): Latch SS1[1]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s1
-Warning (13012): Latch SS1[2]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s1
-Warning (13012): Latch SS1[3]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s6
-Warning (13012): Latch SS1[4]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS1[5]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s6
-Warning (13012): Latch SS1[6]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s1
-Warning (13012): Latch SS2[0]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s2
-Warning (13012): Latch SS2[1]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS2[2]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS2[3]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS2[4]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s2
-Warning (13012): Latch SS2[5]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s2
-Warning (13012): Latch SS2[6]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS3[0]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s3
-Warning (13012): Latch SS3[1]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS3[2]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s6
-Warning (13012): Latch SS3[3]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS3[4]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s6
-Warning (13012): Latch SS3[5]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS3[6]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS4[0]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s4
-Warning (13012): Latch SS4[1]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s4
-Warning (13012): Latch SS4[2]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS4[3]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s4
-Warning (13012): Latch SS4[4]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
-Warning (13012): Latch SS4[5]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s4
-Warning (13012): Latch SS4[6]$latch has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s4
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED5" is stuck at GND
-    Warning (13410): Pin "LED6" is stuck at GND
-    Warning (13410): Pin "LED7" is stuck at GND
-    Warning (13410): Pin "LED8" is stuck at GND
+Warning (10230): Verilog HDL assignment warning at wordle.v(98): truncated value with size 32 to match size of target (4)
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 10 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/Maria/Documents/DSD-Wordle/output_files/wordle.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 265 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 253 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 12 input pins
     Info (21059): Implemented 36 output pins
-    Info (21061): Implemented 217 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 67 warnings
-    Info: Peak virtual memory: 4614 megabytes
-    Info: Processing ended: Sun Nov 24 21:26:25 2024
+    Info (21061): Implemented 205 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 4613 megabytes
+    Info: Processing ended: Tue Nov 26 19:40:28 2024
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 

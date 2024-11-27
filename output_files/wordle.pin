@@ -156,8 +156,8 @@ SS1[3]                       : B19       : output : 2.5 V             :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : B20       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : B21       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : B22       :        :                   :         : 6         :                
-LED7                         : C1        : output : 2.5 V             :         : 1         : Y              
-LED8                         : C2        : output : 2.5 V             :         : 1         : Y              
+count[1]                     : C1        : output : 2.5 V             :         : 1         : Y              
+count[0]                     : C2        : output : 2.5 V             :         : 1         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : C3        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : C4        :        :                   :         : 8         :                
 GND                          : C5        : gnd    :                   :         :           :                
@@ -200,7 +200,7 @@ SS1[1]                       : D19       : output : 2.5 V             :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : D20       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D21       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D22       :        :                   :         : 6         :                
-LED6                         : E1        : output : 2.5 V             :         : 1         : Y              
+count[2]                     : E1        : output : 2.5 V             :         : 1         : Y              
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : E2        : input  : 2.5 V             :         : 1         : N              
 switch_input[7]              : E3        : input  : 2.5 V             :         : 1         : Y              
 switch_input[8]              : E4        : input  : 2.5 V             :         : 1         : Y              
@@ -223,7 +223,7 @@ GND                          : E20       : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : E21       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : E22       :        :                   :         : 6         :                
 enter                        : F1        : input  : 2.5 V             :         : 1         : Y              
-LED5                         : F2        : output : 2.5 V             :         : 1         : Y              
+count[3]                     : F2        : output : 2.5 V             :         : 1         : Y              
 GND                          : F3        : gnd    :                   :         :           :                
 VCCIO1                       : F4        : power  :                   : 2.5V    : 1         :                
 GNDA3                        : F5        : gnd    :                   :         :           :                
