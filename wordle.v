@@ -1,15 +1,18 @@
-module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LED4, count);
+module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LED4, LED5, LED6, LED7, LED8, LED9, LED0, reset);
 
 	////// VARIABLE INITIALIZATION /////////
 	input [9:0] switch_input;
-	input clk, enter;
+	input clk, enter, reset;
 	
 	
 	output reg[6:0] SS1, SS2, SS3, SS4;
 	// Guess correctness outputs
 	output reg LED1, LED2, LED3, LED4;
 	// Current count outputs
-	output reg[3:0] count;
+	output reg LED7, LED8, LED9, LED0;
+	// remaining LED for win celebration
+	output reg LED5, LED6;
+	
 
 	
 	
@@ -20,21 +23,25 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	reg[9:0] UG1, UG2, UG3, UG4;
 	
 	
+	
 	// Set up states
 	parameter s0= 4'b0000, s1= 4'b0001, s2= 4'b0010, s3= 4'b0011, 
 				 s4= 4'b0100, s5= 4'b0101, s6= 4'b0110, s7= 4'b0111,
 				 s8= 4'b1000, s9= 4'b1001;
 	reg [4:0] state, next_state;
-	reg enter_old, B;
+	parameter c0= 3'b000, c1= 3'b001, c2= 3'b010, c3= 3'b011, c4= 3'b100, c5= 3'b101, c6= 3'b111;
+	reg[3:0] count, next_count;
+	reg enter_old, B, reset_old, led_state, led_state_next;
 	
 	initial begin
 	UG1 = 10'b0000000000;
 	UG2 = 10'b0000000000;
 	UG3 = 10'b0000000000;
 	UG4 = 10'b0000000000;
-	LED1 = 1; LED2 = 1; LED3 = 1; LED4 = 1;
+	LED1 = 0; LED2 = 0; LED3 = 0; LED4 = 0;
+	LED7 = 0; LED8 = 0; LED9 = 0; LED0 = 0;
+	LED5 = 0; LED6 = 0;
 	B = 0;
-	enter_old = 0;
 	SS1 = 7'b1111111;
 	SS2 = 7'b1111111;
 	SS3 = 7'b1111111;
@@ -46,10 +53,19 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 
 	always @(posedge clk) begin
 		state <= next_state;
+		count <= next_count;
 		if ((enter==0) && (enter_old==1)) begin
 			B <= 1;
 		end
-		
+		if ((reset==0) && (reset_old==1)) begin
+			UG1 = 10'b0000000000;
+			UG2 = 10'b0000000000;
+			UG3 = 10'b0000000000;
+			UG4 = 10'b0000000000;
+			next_state <= s0; 
+			next_count <= c0;
+			B <= 0;
+		end
 		if (B == 1) begin
 			B <= 0;
 			case (state)
@@ -74,28 +90,38 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 						next_state <= s5;
 						end
 				s5:begin 
-						if (count < 5)begin
+						if ((count == c0) || (count == c1) || (count == c2) || (count == c3) || (count == c4))begin
 							if ((UG1==SW1)&&(UG2==SW2)&&(UG3==SW3)&&(UG4==SW4)) begin
 								next_state <= s7;
 							end 
 							else begin
 								next_state <= s6;
 							end
-						end else if (count >= 5)begin
+						end else if (count == c5)begin
 							next_state <= s8;
 						end
 						end // case
 				s6: begin
-						count <= count +1;
+						case (count)
+							c0: next_count <= c1;
+							c1: next_count <= c2;
+							c2: next_count <= c3;
+							c3: next_count <= c4;
+							c4: next_count <= c5;
+							default: next_count <= c0;
+						endcase
 						next_state <= s1;
 						end // case
 				s7: next_state <= s0;
-				s8: next_state <= s9;
+				s8: begin
+						next_state <= s9;
+						end
 				s9: next_state <= s0; 
 			endcase
 		end // b==1 if statement
 		
 		enter_old <= enter;
+		reset_old <= reset;
 		
 	end //clk
 		always @*
@@ -136,12 +162,73 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	end // always clock
 	
 	always @(state) begin
-    case (state)
+   case (state)
         s0: begin
             SS1 <= 7'b1111111;  
             SS2 <= 7'b1111111; 
             SS3 <= 7'b1111111;
             SS4 <= 7'b1111111;
+				if (UG1 == SW1) begin 
+					LED1 <= 1;
+				end else begin
+					LED1 <= 0;
+					end
+				
+				if (UG2 == SW2) begin 
+					LED2 <= 1;
+				end else begin
+					LED2 <= 0;
+					end
+				
+				if (UG3 == SW3) begin 
+					LED3 <= 1;
+				end else begin
+					LED3 <= 0;
+					end
+				
+				if (UG4 == SW4) begin 
+					LED4 <= 1;
+				end else begin
+					LED4 <= 0;
+					end
+				case (count)
+						c0: begin 
+								LED7 <= 0;
+								LED8 <= 0;
+								LED9 <= 0; 
+								LED0 <= 0; 
+							end
+						c1: begin 
+								LED7 <= 0;
+								LED8 <= 0;
+								LED9 <= 0; 
+								LED0 <= 1; 
+							end
+						c2: begin 
+								LED7 <= 0;
+								LED8 <= 0;
+								LED9 <= 1; 
+								LED0 <= 1;  
+							end
+						c3: begin 
+								LED7 <= 0;
+								LED8 <= 1;
+								LED9 <= 1; 
+								LED0 <= 1; 
+							end
+						c4: begin 
+								LED7 <= 1;
+								LED8 <= 1;
+								LED9 <= 1; 
+								LED0 <= 1; 
+							end
+						c5: begin 
+								LED7 <= 1;
+								LED8 <= 1;
+								LED9 <= 1; 
+								LED0 <= 1; 
+							end
+					endcase 
 				end
         s1: begin 
 				SS1 <= sevenSegment;
@@ -167,40 +254,79 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 				SS3 <= UG3; 
 				SS4 <= sevenSegment;
 				end
-        s4: begin
+        s5: begin
 				SS1 <= UG1;
 				SS2 <= UG2;
 				SS3 <= UG3; 
 				SS4 <= UG4;
-				end
+				end 
 		  s6: begin
 				SS1 <= 7'b1111111;  
             SS2 <= 7'b1111111; 
             SS3 <= 7'b1111111;
             SS4 <= 7'b1111111;
+				
+				// compare guess with actual word
+				
             if (UG1 == SW1) begin 
 					LED1 <= 1;
 				end else begin
 					LED1 <= 0;
 					end
-				
 				if (UG2 == SW2) begin 
 					LED2 <= 1;
 				end else begin
 					LED2 <= 0;
 					end
-				
 				if (UG3 == SW3) begin 
 					LED3 <= 1;
 				end else begin
 					LED3 <= 0;
 					end
-				
 				if (UG4 == SW4) begin 
 					LED4 <= 1;
 				end else begin
 					LED4 <= 0;
 					end
+				case (count)
+						c0: begin 
+								LED7 <= 0;
+								LED8 <= 0;
+								LED9 <= 0; 
+								LED0 <= 0; 
+							end
+						c1: begin 
+								LED7 <= 0;
+								LED8 <= 0;
+								LED9 <= 0; 
+								LED0 <= 1; 
+							end
+						c2: begin 
+								LED7 <= 0;
+								LED8 <= 0;
+								LED9 <= 1; 
+								LED0 <= 1;  
+							end
+						c3: begin 
+								LED7 <= 0;
+								LED8 <= 1;
+								LED9 <= 1; 
+								LED0 <= 1; 
+							end
+						c4: begin 
+								LED7 <= 1;
+								LED8 <= 1;
+								LED9 <= 1; 
+								LED0 <= 1; 
+							end
+						c5: begin 
+								LED7 <= 1;
+								LED8 <= 1;
+								LED9 <= 1; 
+								LED0 <= 1; 
+							end
+					endcase
+					
 				end
         s7: begin
             SS1 <= 7'b1001001; // W
@@ -214,13 +340,14 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
             SS3 <= 7'b0100100; // S
             SS4 <= 7'b0110000; // E
 				end
-        s9: begin
+       s9: begin
             SS1 <= 7'b1100000; // B
             SS2 <= 7'b1001111; // I
             SS3 <= 7'b1001110; // T
             SS4 <= 7'b0100100; // S
 				end
-    endcase
-end
-				
+   endcase
+	
+end // state clock
+	
 endmodule	
