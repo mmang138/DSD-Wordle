@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP3C16F484) Path("C:/Users/Maria/Documents/DSD-Wordle/output_files/") File("wordle.sof") MfrSpec(OpMask(1));
+		Device PartName(EP3C16F484) Path("C:/OneDrive - g.rwu.edu/misc documents/GitHub/DSD-Wordle/output_files/") File("wordle.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

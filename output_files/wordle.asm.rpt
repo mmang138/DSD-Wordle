@@ -1,5 +1,5 @@
 Assembler report for wordle
-Sun Nov 24 21:26:34 2024
+Tue Nov 26 19:19:27 2024
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -10,7 +10,7 @@ Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Maria/Documents/DSD-Wordle/output_files/wordle.sof
+  5. Assembler Device Options: C:/OneDrive - g.rwu.edu/misc documents/GitHub/DSD-Wordle/output_files/wordle.sof
   6. Assembler Messages
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Nov 24 21:26:34 2024 ;
+; Assembler Status      ; Successful - Tue Nov 26 19:19:27 2024 ;
 ; Revision Name         ; wordle                                ;
 ; Top-level Entity Name ; wordle                                ;
 ; Family                ; Cyclone III                           ;
@@ -77,24 +77,24 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+-------------------------------------------------------------+
-; Assembler Generated Files                                   ;
-+-------------------------------------------------------------+
-; File Name                                                   ;
-+-------------------------------------------------------------+
-; C:/Users/Maria/Documents/DSD-Wordle/output_files/wordle.sof ;
-+-------------------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Assembler Generated Files                                                        ;
++----------------------------------------------------------------------------------+
+; File Name                                                                        ;
++----------------------------------------------------------------------------------+
+; C:/OneDrive - g.rwu.edu/misc documents/GitHub/DSD-Wordle/output_files/wordle.sof ;
++----------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Maria/Documents/DSD-Wordle/output_files/wordle.sof ;
-+----------------+----------------------------------------------------------------------+
-; Option         ; Setting                                                              ;
-+----------------+----------------------------------------------------------------------+
-; Device         ; EP3C16F484C6                                                         ;
-; JTAG usercode  ; 0x000E7657                                                           ;
-; Checksum       ; 0x000E7657                                                           ;
-+----------------+----------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/OneDrive - g.rwu.edu/misc documents/GitHub/DSD-Wordle/output_files/wordle.sof ;
++----------------+-------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                   ;
++----------------+-------------------------------------------------------------------------------------------+
+; Device         ; EP3C16F484C6                                                                              ;
+; JTAG usercode  ; 0x000E175D                                                                                ;
+; Checksum       ; 0x000E175D                                                                                ;
++----------------+-------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -103,14 +103,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Sun Nov 24 21:26:33 2024
+    Info: Processing started: Tue Nov 26 19:19:24 2024
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off wordle -c wordle
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4569 megabytes
-    Info: Processing ended: Sun Nov 24 21:26:34 2024
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 4598 megabytes
+    Info: Processing ended: Tue Nov 26 19:19:27 2024
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:01
 
 
