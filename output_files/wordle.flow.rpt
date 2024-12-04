@@ -1,5 +1,5 @@
 Flow report for wordle
-Wed Nov 20 16:17:19 2024
+Wed Nov 27 21:07:22 2024
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -40,18 +40,18 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Flow Summary                                                                    ;
 +------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Wed Nov 20 16:17:18 2024      ;
+; Flow Status                        ; Successful - Wed Nov 27 21:07:22 2024      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; wordle                                     ;
 ; Top-level Entity Name              ; wordle                                     ;
 ; Family                             ; Cyclone III                                ;
 ; Device                             ; EP3C16F484C6                               ;
 ; Timing Models                      ; Final                                      ;
-; Total logic elements               ; 68 / 15,408 ( < 1 % )                      ;
-;     Total combinational functions  ; 68 / 15,408 ( < 1 % )                      ;
-;     Dedicated logic registers      ; 0 / 15,408 ( 0 % )                         ;
-; Total registers                    ; 0                                          ;
-; Total pins                         ; 17 / 347 ( 5 % )                           ;
+; Total logic elements               ; 412 / 15,408 ( 3 % )                       ;
+;     Total combinational functions  ; 395 / 15,408 ( 3 % )                       ;
+;     Dedicated logic registers      ; 143 / 15,408 ( < 1 % )                     ;
+; Total registers                    ; 143                                        ;
+; Total pins                         ; 51 / 347 ( 15 % )                          ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 0 / 516,096 ( 0 % )                        ;
 ; Embedded Multiplier 9-bit elements ; 0 / 112 ( 0 % )                            ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/20/2024 16:17:05 ;
+; Start date & time ; 11/27/2024 21:07:06 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; wordle              ;
 +-------------------+---------------------+
@@ -75,11 +75,12 @@ applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                                ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+------------------------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 92826792302276.173213742527256                       ; --            ; --          ; --             ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST     ; On                                                   ; --            ; --          ; eda_simulation ;
+; COMPILER_SIGNATURE_ID               ; 92826792302276.173275962636856                       ; --            ; --          ; --             ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                                  ; --            ; --          ; eda_simulation ;
 ; EDA_NETLIST_WRITER_OUTPUT_DIR       ; C:/Users/Maria/Documents/DSD-Wordle/simulation/qsim/ ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                                          ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)                            ; <None>        ; --          ; --             ;
+; EDA_TIME_SCALE                      ; 1 ps                                                 ; --            ; --          ; eda_simulation ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                   ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                    ; --            ; --          ; --             ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                                 ; --            ; --          ; --             ;
@@ -95,12 +96,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:01     ; 1.0                     ; 4601 MB             ; 00:00:01                           ;
-; Fitter                    ; 00:00:05     ; 1.0                     ; 4854 MB             ; 00:00:03                           ;
-; Assembler                 ; 00:00:01     ; 1.0                     ; 4571 MB             ; 00:00:01                           ;
-; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 4602 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4522 MB             ; 00:00:00                           ;
-; Total                     ; 00:00:09     ; --                      ; --                  ; 00:00:06                           ;
+; Analysis & Synthesis      ; 00:00:01     ; 1.0                     ; 4600 MB             ; 00:00:01                           ;
+; Fitter                    ; 00:00:06     ; 1.0                     ; 4883 MB             ; 00:00:05                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 4566 MB             ; 00:00:01                           ;
+; TimeQuest Timing Analyzer ; 00:00:01     ; 1.0                     ; 4604 MB             ; 00:00:01                           ;
+; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4538 MB             ; 00:00:01                           ;
+; Total                     ; 00:00:09     ; --                      ; --                  ; 00:00:09                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
