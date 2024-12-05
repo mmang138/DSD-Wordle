@@ -13,15 +13,19 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	// remaining LED for win celebration
 	output reg LED5, LED6;
 	
-
-	
-	
-	reg[6:0] sevenSegment;
 	// SG = set word [BITS]
-	reg[6:0] SW1=7'b1100000, SW2=7'b1001111, SW3=7'b1001110, SW4=7'b0100100;
+	reg[6:0] SW1, SW2, SW3, SW4;	
+	reg[6:0] sevenSegment;
 	// UG = user guess
 	reg[9:0] UG1, UG2, UG3, UG4;
 	
+	
+	// flash indicating a win
+	reg[31:0] flash_counter; // counter for LED flashing
+	reg slow_clk; // Slower clock for flashing
+	
+	// stores the number of clock pulses
+	reg [5:0] s0_counter;
 	
 	
 	// Set up states
@@ -31,7 +35,7 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	reg [4:0] state, next_state;
 	parameter c0= 3'b000, c1= 3'b001, c2= 3'b010, c3= 3'b011, c4= 3'b100, c5= 3'b101, c6= 3'b111;
 	reg[3:0] count, next_count;
-	reg enter_old, B, reset_old, led_state, led_state_next;
+	reg enter_old, B, reset_old, led_state, led_state_next, X;
 	
 	initial begin
 	UG1 = 10'b0000000000;
@@ -42,18 +46,29 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	LED7 = 0; LED8 = 0; LED9 = 0; LED0 = 0;
 	LED5 = 0; LED6 = 0;
 	B = 0;
+	X = 0;
 	SS1 = 7'b1111111;
 	SS2 = 7'b1111111;
 	SS3 = 7'b1111111;
 	SS4 = 7'b1111111;	
 	state= s0;
 	count = 3'b000;
+	SW1=7'b1100000;
+	SW2=7'b1001111;
+	SW3=7'b1001110;
+	SW4=7'b0100100;
 	end
 
-
+	
 	always @(posedge clk) begin
-		state <= next_state;
-		count <= next_count;
+	   // Generate a slower clock for flashing LEDs
+		if (flash_counter == 21) begin // Adjust this value for flashing speed
+			 flash_counter <= 0;
+			 slow_clk <= ~slow_clk; // Toggle slow_clk
+		end else begin
+			 flash_counter <= flash_counter + 1;
+		end
+		
 		if ((enter==0) && (enter_old==1)) begin
 			B <= 1;
 		end
@@ -66,13 +81,148 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 			next_count <= c0;
 			B <= 0;
 		end
+		if (state == s0) begin
+				X <= 1;
+				if (s0_counter == 5'b10011) begin 
+								 s0_counter <= 5'b00000;
+							end else begin
+								 s0_counter <= s0_counter + 1;
+							end
+			end
 		if (B == 1) begin
 			B <= 0;
 			case (state)
 				// reset state
 				s0: begin 
+						if (X == 1) begin
+							X <= 0;
+							case (s0_counter)
+							5'b00000: begin // code
+											SW1=7'b0110001; // C
+											SW2=7'b0000001; // O
+											SW3=7'b1000010; // D
+											SW4=7'b0110000; // E
+										end
+							5'b00001: begin // love
+											SW1=7'b1110001; // L
+											SW2=7'b0000001; // O
+											SW3=7'b1101011; // V
+											SW4=7'b0110000; // E
+										end
+							5'b00010: begin // flip
+											SW1=7'b0111000; // F
+											SW2=7'b1110001; // L
+											SW3=7'b1001111; // I
+											SW4=7'b0011000; // P
+										end
+							5'b00011: begin // flop
+											SW1=7'b0111000; // F
+											SW2=7'b1110001; // L
+											SW3=7'b0000001; // O
+											SW4=7'b0011000; // P			
+										end
+							5'b00100: begin // fpga
+											SW1=7'b0111000; // F
+											SW2=7'b0011000; // P
+											SW3=7'b0000100; // G
+											SW4=7'b0001000; // A		
+										end
+							5'b00101: begin // blue
+											SW1=7'b1100000; // B
+											SW2=7'b1110001; // L
+											SW3=7'b1000001; // U
+											SW4=7'b0110000; // E	
+										end
+							5'b00110: begin // star
+											SW1=7'b0100100; // S
+											SW2=7'b1001110; // T
+											SW3=7'b0001000; // A
+											SW4=7'b1111010; // R	
+										end
+							5'b00111: begin // fire
+											SW1=7'b0111000; // F
+											SW2=7'b1001111; // I
+											SW3=7'b1111010; // R
+											SW4=7'b0110000; // E		
+										end
+							5'b01000: begin // gold
+											SW1=7'b0000100; // G
+											SW2=7'b0000001; // O
+											SW3=7'b1110001; // L
+											SW4=7'b1000010; // D		
+										end
+							5'b01001: begin // wind
+											SW1=7'b1001001; // W
+											SW2=7'b1001111; // I
+											SW3=7'b1011010; // N
+											SW4=7'b1000010; // D		
+										end
+							5'b01010: begin // park
+											SW1=7'b0011000; // P
+											SW2=7'b0001000; // A
+											SW3=7'b1111010; // R
+											SW4=7'b1111000; // K			
+										end
+							5'b01011: begin // moon
+											SW1=7'b1101010; // M
+											SW2=7'b0000001; // O
+											SW3=7'b0000001; // O
+											SW4=7'b1011010; // N	
+										end
+							5'b01100: begin // wave
+											SW1=7'b1001001; // W
+											SW2=7'b0001000; // A
+											SW3=7'b1101011; // V
+											SW4=7'b0110000; // E		
+										end
+							5'b01101: begin // book 
+											SW1=7'b1100000; // B
+											SW2=7'b0000001; // O
+											SW3=7'b0000001; // O
+											SW4=7'b1111000; // K	
+										end
+							5'b01110: begin // tree
+											SW1=7'b1001110; // T
+											SW2=7'b1111010; // R
+											SW3=7'b0110000; // E
+											SW4=7'b0110000; // E		
+										end
+							5'b01111: begin // calm
+											SW1=7'b0110001; // C
+											SW2=7'b0001000; // A
+											SW3=7'b1110001; // L
+											SW4=7'b1101010; // M
+										end
+							5'b10000: begin // rain 
+											SW1=7'b1111010; // R
+											SW2=7'b0001000; // A
+											SW3=7'b1001111; // I
+											SW4=7'b1011010; // N
+										end
+							5'b10001: begin // brim
+											SW1=7'b1100000; // B
+											SW2=7'b1111010; // R
+											SW3=7'b1001111; // I
+											SW4=7'b1101010; // M		
+										end
+							5'b10010: begin // glow
+											SW1=7'b0000100; // G
+											SW2=7'b1110001; // L
+											SW3=7'b0000001; // O
+											SW4=7'b1001001; // W		
+										end
+							5'b10011: begin // bits 
+											SW1=7'b1100000; // B
+											SW2=7'b1001111; // I
+											SW3=7'b1001110; // T
+											SW4=7'b0100100; // S
+										end
+						endcase
+						end
+						
 						next_state <= s1;
-						end 
+						
+						end // case s0
 				s1: begin 
 						UG1 <= sevenSegment;
 						next_state <= s2;
@@ -89,7 +239,7 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 						UG4 <= sevenSegment;
 						next_state <= s5;
 						end
-				s5:begin 
+				s5: begin 
 						if ((count == c0) || (count == c1) || (count == c2) || (count == c3) || (count == c4))begin
 							if ((UG1==SW1)&&(UG2==SW2)&&(UG3==SW3)&&(UG4==SW4)) begin
 								next_state <= s7;
@@ -110,22 +260,23 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 							c4: next_count <= c5;
 							default: next_count <= c0;
 						endcase
-						next_state <= s1;
+						next_state <= s0;
 						end // case
 				s7: next_state <= s0;
-				s8: begin
-						next_state <= s9;
-						end
+				s8: next_state <= s0; 
 				s9: next_state <= s0; 
 			endcase
 		end // b==1 if statement
-		
+		state <= next_state;
+		count <= next_count;
 		enter_old <= enter;
 		reset_old <= reset;
 		
 	end //clk
-		always @*
+	
+	always @*
 		begin
+		  
 			case(switch_input)
 			// multiplier of 0 (000)
 			10'b1000000000 : sevenSegment = 7'b0001000; // A
@@ -162,12 +313,16 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	end // always clock
 	
 	always @(state) begin
-   case (state)
+		case (state)
         s0: begin
-            SS1 <= 7'b1111111;  
-            SS2 <= 7'b1111111; 
-            SS3 <= 7'b1111111;
-            SS4 <= 7'b1111111;
+            // SS1 <= 7'b1111111;  
+            // SS2 <= 7'b1111111; 
+            // SS3 <= 7'b1111111;
+            // SS4 <= 7'b1111111;
+				SS1 <= SW1;
+            SS2 <= SW2;
+            SS3 <= SW3;
+            SS4 <= SW4;
 				if (UG1 == SW1) begin 
 					LED1 <= 1;
 				end else begin
@@ -333,6 +488,11 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
             SS2 <= 7'b1001111; // I
             SS3 <= 7'b1011010; // N
             SS4 <= 7'b0100100; // S
+				
+				// Flash LEDs
+            LED5 <= slow_clk;
+            LED6 <= slow_clk; 
+				
 				end
         s8: begin
             SS1 <= 7'b1110001; // L
@@ -341,13 +501,13 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
             SS4 <= 7'b0110000; // E
 				end
        s9: begin
-            SS1 <= 7'b1100000; // B
-            SS2 <= 7'b1001111; // I
-            SS3 <= 7'b1001110; // T
-            SS4 <= 7'b0100100; // S
+            SS1 <= SW1;
+            SS2 <= SW2;
+            SS3 <= SW3;
+            SS4 <= SW4;
 				end
-   endcase
+		endcase
 	
-end // state clock
+	end // state clock
 	
 endmodule	

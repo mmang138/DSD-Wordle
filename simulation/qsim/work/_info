@@ -4,78 +4,78 @@ K3
 cModel Technology
 Z0 dC:\Users\Maria\Documents\DSD-Wordle\simulation\qsim
 vwordle
-Z1 !s100 e^H=`6NT>HW`glWKHzED21
-Z2 IRVL=GIniaQkAGJU;:^T>K3
-Z3 V?WOccLZ91C[3?MS2K2KiX0
-Z4 dC:\Users\Maria\Documents\DSD-Wordle\simulation\qsim
-Z5 w1732664719
-Z6 8wordle.vo
-Z7 Fwordle.vo
+Z1 IB:VDJAXal[=T<bX6gPQ^J3
+Z2 VPNg[Kk<WLEl6mKHEBBz>X1
+Z3 dC:\Users\Maria\Documents\DSD-Wordle\simulation\qsim
+Z4 w1733369008
+Z5 8wordle.vo
+Z6 Fwordle.vo
 L0 31
-Z8 OV;L;10.1d;51
+Z7 OV;L;10.1d;51
 r1
 31
-Z9 !s90 -work|work|wordle.vo|
-Z10 o-work work -O0
+Z8 !s90 -work|work|wordle.vo|
+Z9 o-work work -O0
 !i10b 1
+Z10 !s100 40o@aPNKZSjWQhfAZ5mnX3
 !s85 0
-Z11 !s108 1732664720.570000
+Z11 !s108 1733369010.964000
 Z12 !s107 wordle.vo|
 !s101 -O0
 vwordle_vlg_check_tst
 !i10b 1
-Z13 !s100 8:dBPdbel=`?9Z0kob3iF1
-Z14 IFV1;l1TBCMb9SO`IJfUj>1
-Z15 V^g:OUPJadojPbRPbhj;h`3
-R4
-Z16 w1732664717
-Z17 8Waveform.vwf.vt
-Z18 FWaveform.vwf.vt
-L0 61
-R8
+!s100 UFFlH2ka:@z0zMTCl]_O63
+IVYo[<?OWFXjOQW8Pdo2Vh3
+VaDCK9]5SP3aN^gl3Ri[2>1
+R3
+Z13 w1733369006
+Z14 8Waveform1.vwf.vt
+Z15 FWaveform1.vwf.vt
+L0 63
+R7
 r1
 !s85 0
 31
-Z19 !s108 1732664720.728000
-Z20 !s107 Waveform.vwf.vt|
-Z21 !s90 -work|work|Waveform.vwf.vt|
+Z16 !s108 1733369011.187000
+Z17 !s107 Waveform1.vwf.vt|
+Z18 !s90 -work|work|Waveform1.vwf.vt|
 !s101 -O0
-R10
+R9
 vwordle_vlg_sample_tst
 !i10b 1
-Z22 !s100 F<UV4HKH0z14NMIeWR4EM1
-Z23 IGEARSTbnR?ZFNVKNRH_Ah2
-Z24 Vz6EZfBfe8HD?LEX7:4@600
-R4
-R16
-R17
-R18
+!s100 k=1GSkWfh^_U=CcA[ac630
+Ig?Ml]:B^>OGJP[6k_52510
+V;LY]fBcljdzK3NzE]DncN2
+R3
+R13
+R14
+R15
 L0 29
-R8
+R7
 r1
 !s85 0
 31
-R19
-R20
-R21
+R16
+R17
+R18
 !s101 -O0
-R10
+R9
 vwordle_vlg_vec_tst
 !i10b 1
-!s100 ^ZcMmKCNc61b9>20N0[Ud0
-IL2hVN:?GeFWZIRFmEIY;`3
-Z25 V?U@B9gX60I`]7SC]g9DN52
-R4
-R16
-R17
-R18
-Z26 L0 853
-R8
+!s100 MNMVG9;fUMZ62fHG87R1R3
+Ilc=94]BeV3Vi9bA7ko20[0
+Z19 V?U@B9gX60I`]7SC]g9DN52
+R3
+R13
+R14
+R15
+L0 937
+R7
 r1
 !s85 0
 31
-R19
-R20
-R21
+R16
+R17
+R18
 !s101 -O0
-R10
+R9

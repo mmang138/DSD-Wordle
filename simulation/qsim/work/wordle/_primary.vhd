@@ -13,6 +13,12 @@ entity wordle is
         LED2            : out    vl_logic;
         LED3            : out    vl_logic;
         LED4            : out    vl_logic;
-        count           : out    vl_logic_vector(3 downto 0)
+        LED5            : out    vl_logic;
+        LED6            : out    vl_logic;
+        LED7            : out    vl_logic;
+        LED8            : out    vl_logic;
+        LED9            : out    vl_logic;
+        LED0            : out    vl_logic;
+        reset           : in     vl_logic
     );
 end wordle;
