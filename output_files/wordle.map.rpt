@@ -1,5 +1,5 @@
 Analysis & Synthesis report for wordle
-Wed Dec 04 23:05:53 2024
+Fri Dec 06 22:35:57 2024
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -58,15 +58,15 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Dec 04 23:05:53 2024      ;
+; Analysis & Synthesis Status        ; Successful - Fri Dec 06 22:35:56 2024      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; wordle                                     ;
 ; Top-level Entity Name              ; wordle                                     ;
 ; Family                             ; Cyclone III                                ;
-; Total logic elements               ; 645                                        ;
-;     Total combinational functions  ; 628                                        ;
-;     Dedicated logic registers      ; 215                                        ;
-; Total registers                    ; 215                                        ;
+; Total logic elements               ; 665                                        ;
+;     Total combinational functions  ; 647                                        ;
+;     Dedicated logic registers      ; 202                                        ;
+; Total registers                    ; 202                                        ;
 ; Total pins                         ; 51                                         ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 0                                          ;
@@ -187,28 +187,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 645       ;
+; Estimated Total logic elements              ; 665       ;
 ;                                             ;           ;
-; Total combinational functions               ; 628       ;
+; Total combinational functions               ; 647       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 482       ;
-;     -- 3 input functions                    ; 66        ;
-;     -- <=2 input functions                  ; 80        ;
+;     -- 4 input functions                    ; 475       ;
+;     -- 3 input functions                    ; 84        ;
+;     -- <=2 input functions                  ; 88        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 592       ;
+;     -- normal mode                          ; 611       ;
 ;     -- arithmetic mode                      ; 36        ;
 ;                                             ;           ;
-; Total registers                             ; 215       ;
-;     -- Dedicated logic registers            ; 215       ;
+; Total registers                             ; 202       ;
+;     -- Dedicated logic registers            ; 202       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 51        ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 215       ;
-; Total fan-out                               ; 2859      ;
-; Average fan-out                             ; 3.03      ;
+; Maximum fan-out                             ; 202       ;
+; Total fan-out                               ; 2860      ;
+; Average fan-out                             ; 3.01      ;
 +---------------------------------------------+-----------+
 
 
@@ -217,7 +217,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |wordle                    ; 628 (628)         ; 215 (215)    ; 0           ; 0            ; 0       ; 0         ; 51   ; 0            ; |wordle             ; work         ;
+; |wordle                    ; 647 (647)         ; 202 (202)    ; 0           ; 0            ; 0       ; 0         ; 51   ; 0            ; |wordle             ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -416,21 +416,22 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |wordle|next_state                                                                                                                            ;
-+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
-; Name          ; next_state.s7 ; next_state.s6 ; next_state.s5 ; next_state.s4 ; next_state.s3 ; next_state.s2 ; next_state.s1 ; next_state.s0 ; next_state.s8 ;
-+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
-; next_state.s0 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
-; next_state.s1 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ; 0             ;
-; next_state.s2 ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ; 0             ;
-; next_state.s3 ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ; 0             ;
-; next_state.s4 ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ; 0             ;
-; next_state.s5 ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ;
-; next_state.s6 ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ;
-; next_state.s7 ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ;
-; next_state.s8 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
-+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |wordle|next_state                                                                                                                                            ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; next_state.s9 ; next_state.s8 ; next_state.s7 ; next_state.s6 ; next_state.s5 ; next_state.s4 ; next_state.s3 ; next_state.s2 ; next_state.s1 ; next_state.s0 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; next_state.s0 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; next_state.s1 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; next_state.s2 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; next_state.s3 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; next_state.s4 ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; next_state.s5 ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; next_state.s6 ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; next_state.s7 ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; next_state.s8 ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; next_state.s9 ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
 
 
 Encoding Type:  One-Hot
@@ -582,16 +583,16 @@ Encoding Type:  One-Hot
 +-----------------------------------------------------+---------------------+------------------------+
 ; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
 +-----------------------------------------------------+---------------------+------------------------+
-; LED1$latch                                          ; WideOr129           ; yes                    ;
-; LED2$latch                                          ; WideOr129           ; yes                    ;
-; LED3$latch                                          ; WideOr129           ; yes                    ;
-; LED4$latch                                          ; WideOr129           ; yes                    ;
-; LED5$latch                                          ; state.s7            ; yes                    ;
-; LED6$latch                                          ; state.s7            ; yes                    ;
-; LED7$latch                                          ; WideOr129           ; yes                    ;
-; LED8$latch                                          ; WideOr129           ; yes                    ;
-; LED9$latch                                          ; WideOr129           ; yes                    ;
-; LED0$latch                                          ; WideOr129           ; yes                    ;
+; LED1$latch                                          ; SS1                 ; yes                    ;
+; LED2$latch                                          ; SS1                 ; yes                    ;
+; LED3$latch                                          ; SS1                 ; yes                    ;
+; LED4$latch                                          ; SS1                 ; yes                    ;
+; LED5$latch                                          ; WideOr107           ; yes                    ;
+; LED6$latch                                          ; WideOr107           ; yes                    ;
+; LED7$latch                                          ; WideOr108           ; yes                    ;
+; LED8$latch                                          ; WideOr108           ; yes                    ;
+; LED9$latch                                          ; WideOr108           ; yes                    ;
+; LED0$latch                                          ; WideOr108           ; yes                    ;
 ; Number of user-specified and inferred latches = 10  ;                     ;                        ;
 +-----------------------------------------------------+---------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
@@ -602,7 +603,6 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +-----------------------------------------+----------------------------------------+
 ; Register name                           ; Reason for Removal                     ;
 +-----------------------------------------+----------------------------------------+
-; state.s9                                ; Lost fanout                            ;
 ; count~2                                 ; Lost fanout                            ;
 ; count~3                                 ; Lost fanout                            ;
 ; count~4                                 ; Lost fanout                            ;
@@ -612,42 +612,43 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; state~4                                 ; Lost fanout                            ;
 ; state~5                                 ; Lost fanout                            ;
 ; state~6                                 ; Lost fanout                            ;
-; SW4~19                                  ; Lost fanout                            ;
-; SW4~20                                  ; Lost fanout                            ;
-; SW4~21                                  ; Lost fanout                            ;
-; SW4~22                                  ; Lost fanout                            ;
-; SW4~23                                  ; Lost fanout                            ;
-; SW4~24                                  ; Lost fanout                            ;
-; SW4~25                                  ; Lost fanout                            ;
-; SW3~17                                  ; Lost fanout                            ;
-; SW3~18                                  ; Lost fanout                            ;
-; SW3~19                                  ; Lost fanout                            ;
-; SW3~20                                  ; Lost fanout                            ;
-; SW3~21                                  ; Lost fanout                            ;
-; SW3~22                                  ; Lost fanout                            ;
-; SW3~23                                  ; Lost fanout                            ;
-; SW2~22                                  ; Lost fanout                            ;
-; SW2~23                                  ; Lost fanout                            ;
+; SW4~26                                  ; Lost fanout                            ;
+; SW4~27                                  ; Lost fanout                            ;
+; SW4~28                                  ; Lost fanout                            ;
+; SW4~29                                  ; Lost fanout                            ;
+; SW4~30                                  ; Lost fanout                            ;
+; SW4~31                                  ; Lost fanout                            ;
+; SW4~32                                  ; Lost fanout                            ;
+; SW3~24                                  ; Lost fanout                            ;
+; SW3~25                                  ; Lost fanout                            ;
+; SW3~26                                  ; Lost fanout                            ;
+; SW3~27                                  ; Lost fanout                            ;
+; SW3~28                                  ; Lost fanout                            ;
+; SW3~29                                  ; Lost fanout                            ;
+; SW3~30                                  ; Lost fanout                            ;
 ; SW2~24                                  ; Lost fanout                            ;
 ; SW2~25                                  ; Lost fanout                            ;
 ; SW2~26                                  ; Lost fanout                            ;
 ; SW2~27                                  ; Lost fanout                            ;
 ; SW2~28                                  ; Lost fanout                            ;
-; SW1~18                                  ; Lost fanout                            ;
-; SW1~19                                  ; Lost fanout                            ;
-; SW1~20                                  ; Lost fanout                            ;
-; SW1~21                                  ; Lost fanout                            ;
-; SW1~22                                  ; Lost fanout                            ;
+; SW2~29                                  ; Lost fanout                            ;
+; SW2~30                                  ; Lost fanout                            ;
 ; SW1~23                                  ; Lost fanout                            ;
 ; SW1~24                                  ; Lost fanout                            ;
+; SW1~25                                  ; Lost fanout                            ;
+; SW1~26                                  ; Lost fanout                            ;
+; SW1~27                                  ; Lost fanout                            ;
+; SW1~28                                  ; Lost fanout                            ;
+; SW1~29                                  ; Lost fanout                            ;
 ; next_count~8                            ; Lost fanout                            ;
 ; next_count~9                            ; Lost fanout                            ;
 ; next_count~10                           ; Lost fanout                            ;
 ; next_count~11                           ; Lost fanout                            ;
-; next_state~12                           ; Lost fanout                            ;
-; next_state~13                           ; Lost fanout                            ;
-; next_state~14                           ; Lost fanout                            ;
+; next_state~15                           ; Lost fanout                            ;
 ; next_state~16                           ; Lost fanout                            ;
+; next_state~17                           ; Lost fanout                            ;
+; next_state~18                           ; Lost fanout                            ;
+; next_state~19                           ; Lost fanout                            ;
 ; UG4~29                                  ; Lost fanout                            ;
 ; UG4~30                                  ; Lost fanout                            ;
 ; UG4~31                                  ; Lost fanout                            ;
@@ -688,81 +689,96 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; UG1~36                                  ; Lost fanout                            ;
 ; UG1~37                                  ; Lost fanout                            ;
 ; UG1~38                                  ; Lost fanout                            ;
-; SW1.0001000                             ; Merged with SW1.0000001                ;
+; SW1.0000100                             ; Merged with SW1.0000001                ;
 ; SW1.0001100                             ; Merged with SW1.0000001                ;
 ; SW1.0010010                             ; Merged with SW1.0000001                ;
-; SW1.0110000                             ; Merged with SW1.0000001                ;
+; SW1.0011000                             ; Merged with SW1.0000001                ;
+; SW1.0100100                             ; Merged with SW1.0000001                ;
 ; SW1.1000001                             ; Merged with SW1.0000001                ;
-; SW1.1000010                             ; Merged with SW1.0000001                ;
 ; SW1.1000100                             ; Merged with SW1.0000001                ;
 ; SW1.1000111                             ; Merged with SW1.0000001                ;
 ; SW1.1001000                             ; Merged with SW1.0000001                ;
+; SW1.1001001                             ; Merged with SW1.0000001                ;
+; SW1.1001110                             ; Merged with SW1.0000001                ;
 ; SW1.1001111                             ; Merged with SW1.0000001                ;
 ; SW1.1011010                             ; Merged with SW1.0000001                ;
 ; SW1.1101000                             ; Merged with SW1.0000001                ;
+; SW1.1101010                             ; Merged with SW1.0000001                ;
 ; SW1.1101011                             ; Merged with SW1.0000001                ;
+; SW1.1110001                             ; Merged with SW1.0000001                ;
 ; SW1.1111000                             ; Merged with SW1.0000001                ;
-; SW2.0000100                             ; Merged with SW1.0000001                ;
+; SW1.1111010                             ; Merged with SW1.0000001                ;
+; SW2.0000001                             ; Merged with SW1.0000001                ;
 ; SW2.0001100                             ; Merged with SW1.0000001                ;
 ; SW2.0010010                             ; Merged with SW1.0000001                ;
+; SW2.0011000                             ; Merged with SW1.0000001                ;
 ; SW2.0100100                             ; Merged with SW1.0000001                ;
-; SW2.0110000                             ; Merged with SW1.0000001                ;
-; SW2.0110001                             ; Merged with SW1.0000001                ;
 ; SW2.0111000                             ; Merged with SW1.0000001                ;
 ; SW2.1000001                             ; Merged with SW1.0000001                ;
-; SW2.1000010                             ; Merged with SW1.0000001                ;
 ; SW2.1000100                             ; Merged with SW1.0000001                ;
 ; SW2.1000111                             ; Merged with SW1.0000001                ;
 ; SW2.1001000                             ; Merged with SW1.0000001                ;
 ; SW2.1001001                             ; Merged with SW1.0000001                ;
+; SW2.1001110                             ; Merged with SW1.0000001                ;
+; SW2.1001111                             ; Merged with SW1.0000001                ;
 ; SW2.1011010                             ; Merged with SW1.0000001                ;
 ; SW2.1100000                             ; Merged with SW1.0000001                ;
 ; SW2.1101000                             ; Merged with SW1.0000001                ;
 ; SW2.1101010                             ; Merged with SW1.0000001                ;
 ; SW2.1101011                             ; Merged with SW1.0000001                ;
+; SW2.1110001                             ; Merged with SW1.0000001                ;
 ; SW2.1111000                             ; Merged with SW1.0000001                ;
+; SW2.1111010                             ; Merged with SW1.0000001                ;
+; SW3.0000001                             ; Merged with SW1.0000001                ;
 ; SW3.0001100                             ; Merged with SW1.0000001                ;
 ; SW3.0010010                             ; Merged with SW1.0000001                ;
 ; SW3.0011000                             ; Merged with SW1.0000001                ;
 ; SW3.0100100                             ; Merged with SW1.0000001                ;
-; SW3.0110001                             ; Merged with SW1.0000001                ;
 ; SW3.0111000                             ; Merged with SW1.0000001                ;
+; SW3.1000001                             ; Merged with SW1.0000001                ;
 ; SW3.1000100                             ; Merged with SW1.0000001                ;
 ; SW3.1000111                             ; Merged with SW1.0000001                ;
 ; SW3.1001000                             ; Merged with SW1.0000001                ;
 ; SW3.1001001                             ; Merged with SW1.0000001                ;
+; SW3.1001110                             ; Merged with SW1.0000001                ;
+; SW3.1001111                             ; Merged with SW1.0000001                ;
+; SW3.1011010                             ; Merged with SW1.0000001                ;
 ; SW3.1100000                             ; Merged with SW1.0000001                ;
 ; SW3.1101000                             ; Merged with SW1.0000001                ;
 ; SW3.1101010                             ; Merged with SW1.0000001                ;
+; SW3.1101011                             ; Merged with SW1.0000001                ;
+; SW3.1110001                             ; Merged with SW1.0000001                ;
 ; SW3.1111000                             ; Merged with SW1.0000001                ;
+; SW3.1111010                             ; Merged with SW1.0000001                ;
 ; SW4.0000001                             ; Merged with SW1.0000001                ;
 ; SW4.0000100                             ; Merged with SW1.0000001                ;
+; SW4.0001000                             ; Merged with SW1.0000001                ;
 ; SW4.0001100                             ; Merged with SW1.0000001                ;
 ; SW4.0010010                             ; Merged with SW1.0000001                ;
+; SW4.0011000                             ; Merged with SW1.0000001                ;
+; SW4.0100100                             ; Merged with SW1.0000001                ;
 ; SW4.0110001                             ; Merged with SW1.0000001                ;
-; SW4.0111000                             ; Merged with SW1.0000001                ;
 ; SW4.1000001                             ; Merged with SW1.0000001                ;
 ; SW4.1000100                             ; Merged with SW1.0000001                ;
 ; SW4.1000111                             ; Merged with SW1.0000001                ;
 ; SW4.1001000                             ; Merged with SW1.0000001                ;
+; SW4.1001001                             ; Merged with SW1.0000001                ;
 ; SW4.1001110                             ; Merged with SW1.0000001                ;
 ; SW4.1001111                             ; Merged with SW1.0000001                ;
+; SW4.1011010                             ; Merged with SW1.0000001                ;
 ; SW4.1100000                             ; Merged with SW1.0000001                ;
 ; SW4.1101000                             ; Merged with SW1.0000001                ;
+; SW4.1101010                             ; Merged with SW1.0000001                ;
 ; SW4.1101011                             ; Merged with SW1.0000001                ;
 ; SW4.1110001                             ; Merged with SW1.0000001                ;
-; SW3.0110000                             ; Merged with SW1.1001110                ;
-; SW2.1001110                             ; Merged with SW1.0100100                ;
-; SW3.0001000                             ; Merged with SW1.0100100                ;
-; SW4.1111010                             ; Merged with SW1.0100100                ;
+; SW4.1111000                             ; Merged with SW1.0000001                ;
+; SW4.1111010                             ; Merged with SW1.0000001                ;
 ; SW2.0000000                             ; Merged with SW1.0000000                ;
 ; SW3.0000000                             ; Merged with SW1.0000000                ;
 ; SW4.0000000                             ; Merged with SW1.0000000                ;
-; SW3.0000100                             ; Merged with SW2.0011000                ;
-; SW4.0001000                             ; Merged with SW2.0011000                ;
-; SW4.0100100                             ; Merged with SW3.1001110                ;
+; SW2.1000010                             ; Merged with SW1.0110000                ;
 ; SW1.0000001                             ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 160 ;                                        ;
+; Total Number of Removed Registers = 175 ;                                        ;
 +-----------------------------------------+----------------------------------------+
 
 
@@ -771,12 +787,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 215   ;
+; Total registers                              ; 202   ;
 ; Number of registers using Synchronous Clear  ; 3     ;
-; Number of registers using Synchronous Load   ; 2     ;
+; Number of registers using Synchronous Load   ; 6     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 52    ;
+; Number of registers using Clock Enable       ; 30    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -786,24 +802,22 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |wordle|next_state         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |wordle|next_state         ;
 ; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; No         ; |wordle|UG1                ;
 ; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; No         ; |wordle|UG2                ;
 ; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; No         ; |wordle|UG3                ;
 ; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; No         ; |wordle|UG4                ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |wordle|next_count         ;
-; 5:1                ; 68 bits   ; 204 LEs       ; 68 LEs               ; 136 LEs                ; No         ; |wordle|SW3                ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |wordle|Selector82         ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |wordle|next_state         ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |wordle|Selector73         ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; No         ; |wordle|Selector74         ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; No         ; |wordle|Selector67         ;
-; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |wordle|Selector61         ;
-; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |wordle|Selector64         ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |wordle|Selector57         ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |wordle|Selector60         ;
-; 35:1               ; 2 bits    ; 46 LEs        ; 8 LEs                ; 38 LEs                 ; No         ; |wordle|SW4                ;
-; 67:1               ; 38 bits   ; 1672 LEs      ; 532 LEs              ; 1140 LEs               ; No         ; |wordle|SW2                ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |wordle|Selector41         ;
+; 5:1                ; 89 bits   ; 267 LEs       ; 89 LEs               ; 178 LEs                ; No         ; |wordle|SW3                ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; No         ; |wordle|Selector66         ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |wordle|Selector49         ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |wordle|Selector56         ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |wordle|Selector62         ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |wordle|Selector51         ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |wordle|Selector44         ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |wordle|Selector46         ;
+; 67:1               ; 19 bits   ; 836 LEs       ; 266 LEs              ; 570 LEs                ; No         ; |wordle|SW3                ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
@@ -848,79 +862,108 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Wed Dec 04 23:05:51 2024
+    Info: Processing started: Fri Dec 06 22:35:54 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off wordle -c wordle
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file wordle.v
     Info (12023): Found entity 1: wordle
 Info (12127): Elaborating entity "wordle" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at wordle.v(89): truncated value with size 32 to match size of target (6)
-Info (10264): Verilog HDL Case Statement information at wordle.v(255): all case item expressions in this case statement are onehot
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(326): variable "UG1" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(326): variable "SW1" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(332): variable "UG2" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(332): variable "SW2" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(338): variable "UG3" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(338): variable "SW3" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(344): variable "UG4" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(344): variable "SW4" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(349): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10230): Verilog HDL assignment warning at wordle.v(395): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(401): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(402): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(407): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(408): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(409): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(413): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(414): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(415): truncated value with size 10 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at wordle.v(416): truncated value with size 10 to match size of target (7)
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(426): variable "UG1" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(426): variable "SW1" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(431): variable "UG2" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(431): variable "SW2" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(436): variable "UG3" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(436): variable "SW3" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(441): variable "UG4" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(441): variable "SW4" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(446): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(493): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at wordle.v(494): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED1", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED2", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED3", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED4", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED7", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED8", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED9", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED0", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED5", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at wordle.v(315): inferring latch(es) for variable "LED6", which holds its previous value in one or more paths through the always construct
-Info (10041): Inferred latch for "LED6" at wordle.v(315)
-Info (10041): Inferred latch for "LED5" at wordle.v(315)
-Info (10041): Inferred latch for "LED0" at wordle.v(315)
-Info (10041): Inferred latch for "LED9" at wordle.v(315)
-Info (10041): Inferred latch for "LED8" at wordle.v(315)
-Info (10041): Inferred latch for "LED7" at wordle.v(315)
-Info (10041): Inferred latch for "LED4" at wordle.v(315)
-Info (10041): Inferred latch for "LED3" at wordle.v(315)
-Info (10041): Inferred latch for "LED2" at wordle.v(315)
-Info (10041): Inferred latch for "LED1" at wordle.v(315)
+Warning (10230): Verilog HDL assignment warning at wordle.v(91): truncated value with size 32 to match size of target (6)
+Warning (10230): Verilog HDL assignment warning at wordle.v(101): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at wordle.v(102): truncated value with size 32 to match size of target (1)
+Info (10264): Verilog HDL Case Statement information at wordle.v(99): all case item expressions in this case statement are onehot
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(573): variable "switch_input" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info (10264): Verilog HDL Case Statement information at wordle.v(573): all case item expressions in this case statement are onehot
+Warning (10230): Verilog HDL assignment warning at wordle.v(608): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(614): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(615): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(620): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(621): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(622): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(626): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(627): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(628): truncated value with size 10 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at wordle.v(629): truncated value with size 10 to match size of target (7)
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(639): variable "UG1" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(639): variable "SW1" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(644): variable "UG2" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(644): variable "SW2" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(649): variable "UG3" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(649): variable "SW3" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(654): variable "UG4" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(654): variable "SW4" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(659): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(697): variable "UG1" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(697): variable "SW1" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(703): variable "UG2" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(703): variable "SW2" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(709): variable "UG3" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(709): variable "SW3" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(715): variable "UG4" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(715): variable "SW4" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(728): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(729): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(730): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(731): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(732): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(733): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(734): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(735): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(736): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at wordle.v(737): variable "slow_clk" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED5", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED6", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED1", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED2", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED3", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED4", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED7", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED8", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED9", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at wordle.v(569): inferring latch(es) for variable "LED0", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "LED0" at wordle.v(569)
+Info (10041): Inferred latch for "LED9" at wordle.v(569)
+Info (10041): Inferred latch for "LED8" at wordle.v(569)
+Info (10041): Inferred latch for "LED7" at wordle.v(569)
+Info (10041): Inferred latch for "LED4" at wordle.v(569)
+Info (10041): Inferred latch for "LED3" at wordle.v(569)
+Info (10041): Inferred latch for "LED2" at wordle.v(569)
+Info (10041): Inferred latch for "LED1" at wordle.v(569)
+Info (10041): Inferred latch for "LED6" at wordle.v(569)
+Info (10041): Inferred latch for "LED5" at wordle.v(569)
 Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
     Info (13026): Duplicate LATCH primitive "LED6$latch" merged with LATCH primitive "LED5$latch"
+Warning (13012): Latch LED1$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s7
+Warning (13012): Latch LED2$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s7
+Warning (13012): Latch LED3$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s7
+Warning (13012): Latch LED4$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s7
+Warning (13012): Latch LED5$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s7
+Warning (13012): Latch LED7$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
+Warning (13012): Latch LED8$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
+Warning (13012): Latch LED9$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
+Warning (13012): Latch LED0$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal state.s8
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 86 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/Maria/Documents/DSD-Wordle/output_files/wordle.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 702 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 716 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 13 input pins
     Info (21059): Implemented 38 output pins
-    Info (21061): Implemented 651 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 42 warnings
-    Info: Peak virtual memory: 4612 megabytes
-    Info: Processing ended: Wed Dec 04 23:05:53 2024
-    Info: Elapsed time: 00:00:02
+    Info (21061): Implemented 665 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 70 warnings
+    Info: Peak virtual memory: 4611 megabytes
+    Info: Processing ended: Fri Dec 06 22:35:57 2024
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 
 

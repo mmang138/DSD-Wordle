@@ -25,7 +25,7 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	reg slow_clk; // Slower clock for flashing
 	
 	// stores the number of clock pulses
-	reg [5:0] s0_counter;
+	reg [5:0] clk_counter;
 	
 	
 	// Set up states
@@ -35,7 +35,7 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	reg [4:0] state, next_state;
 	parameter c0= 3'b000, c1= 3'b001, c2= 3'b010, c3= 3'b011, c4= 3'b100, c5= 3'b101, c6= 3'b111;
 	reg[3:0] count, next_count;
-	reg enter_old, B, reset_old, led_state, led_state_next, X;
+	reg enter_old, B, reset_old, led_state, led_state_next, S;
 	
 	initial begin
 	UG1 = 10'b0000000000;
@@ -46,7 +46,7 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	LED7 = 0; LED8 = 0; LED9 = 0; LED0 = 0;
 	LED5 = 0; LED6 = 0;
 	B = 0;
-	X = 0;
+	S = 0;
 	SS1 = 7'b1111111;
 	SS2 = 7'b1111111;
 	SS3 = 7'b1111111;
@@ -62,7 +62,7 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	
 	always @(posedge clk) begin
 	   // Generate a slower clock for flashing LEDs
-		if (flash_counter == 21) begin // Adjust this value for flashing speed
+		if (flash_counter == 7500000) begin // Adjust this value for flashing speed
 			 flash_counter <= 0;
 			 slow_clk <= ~slow_clk; // Toggle slow_clk
 		end else begin
@@ -80,149 +80,403 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 			next_state <= s0; 
 			next_count <= c0;
 			B <= 0;
+			S <= 0;
 		end
+		
+		// for random word generator
 		if (state == s0) begin
-				X <= 1;
-				if (s0_counter == 5'b10011) begin 
-								 s0_counter <= 5'b00000;
-							end else begin
-								 s0_counter <= s0_counter + 1;
-							end
+			if (clk_counter == 5'b10011) begin 
+				clk_counter <= 5'b00000;
+			end else begin
+				clk_counter <= clk_counter + 1;
 			end
+		end
+		
 		if (B == 1) begin
 			B <= 0;
 			case (state)
-				// reset state
 				s0: begin 
-						if (X == 1) begin
-							X <= 0;
-							case (s0_counter)
-							5'b00000: begin // code
-											SW1=7'b0110001; // C
-											SW2=7'b0000001; // O
-											SW3=7'b1000010; // D
-											SW4=7'b0110000; // E
-										end
-							5'b00001: begin // love
-											SW1=7'b1110001; // L
-											SW2=7'b0000001; // O
-											SW3=7'b1101011; // V
-											SW4=7'b0110000; // E
-										end
-							5'b00010: begin // flip
-											SW1=7'b0111000; // F
-											SW2=7'b1110001; // L
-											SW3=7'b1001111; // I
-											SW4=7'b0011000; // P
-										end
-							5'b00011: begin // flop
-											SW1=7'b0111000; // F
-											SW2=7'b1110001; // L
-											SW3=7'b0000001; // O
-											SW4=7'b0011000; // P			
-										end
-							5'b00100: begin // fpga
-											SW1=7'b0111000; // F
-											SW2=7'b0011000; // P
-											SW3=7'b0000100; // G
-											SW4=7'b0001000; // A		
-										end
-							5'b00101: begin // blue
-											SW1=7'b1100000; // B
-											SW2=7'b1110001; // L
-											SW3=7'b1000001; // U
-											SW4=7'b0110000; // E	
-										end
-							5'b00110: begin // star
-											SW1=7'b0100100; // S
-											SW2=7'b1001110; // T
-											SW3=7'b0001000; // A
-											SW4=7'b1111010; // R	
-										end
-							5'b00111: begin // fire
-											SW1=7'b0111000; // F
-											SW2=7'b1001111; // I
-											SW3=7'b1111010; // R
-											SW4=7'b0110000; // E		
-										end
-							5'b01000: begin // gold
-											SW1=7'b0000100; // G
-											SW2=7'b0000001; // O
-											SW3=7'b1110001; // L
-											SW4=7'b1000010; // D		
-										end
-							5'b01001: begin // wind
-											SW1=7'b1001001; // W
-											SW2=7'b1001111; // I
-											SW3=7'b1011010; // N
-											SW4=7'b1000010; // D		
-										end
-							5'b01010: begin // park
-											SW1=7'b0011000; // P
-											SW2=7'b0001000; // A
-											SW3=7'b1111010; // R
-											SW4=7'b1111000; // K			
-										end
-							5'b01011: begin // moon
-											SW1=7'b1101010; // M
-											SW2=7'b0000001; // O
-											SW3=7'b0000001; // O
-											SW4=7'b1011010; // N	
-										end
-							5'b01100: begin // wave
-											SW1=7'b1001001; // W
-											SW2=7'b0001000; // A
-											SW3=7'b1101011; // V
-											SW4=7'b0110000; // E		
-										end
-							5'b01101: begin // book 
-											SW1=7'b1100000; // B
-											SW2=7'b0000001; // O
-											SW3=7'b0000001; // O
-											SW4=7'b1111000; // K	
-										end
-							5'b01110: begin // tree
-											SW1=7'b1001110; // T
-											SW2=7'b1111010; // R
-											SW3=7'b0110000; // E
-											SW4=7'b0110000; // E		
-										end
-							5'b01111: begin // calm
-											SW1=7'b0110001; // C
-											SW2=7'b0001000; // A
-											SW3=7'b1110001; // L
-											SW4=7'b1101010; // M
-										end
-							5'b10000: begin // rain 
-											SW1=7'b1111010; // R
-											SW2=7'b0001000; // A
-											SW3=7'b1001111; // I
-											SW4=7'b1011010; // N
-										end
-							5'b10001: begin // brim
-											SW1=7'b1100000; // B
-											SW2=7'b1111010; // R
-											SW3=7'b1001111; // I
-											SW4=7'b1101010; // M		
-										end
-							5'b10010: begin // glow
-											SW1=7'b0000100; // G
-											SW2=7'b1110001; // L
-											SW3=7'b0000001; // O
-											SW4=7'b1001001; // W		
-										end
-							5'b10011: begin // bits 
-											SW1=7'b1100000; // B
-											SW2=7'b1001111; // I
-											SW3=7'b1001110; // T
-											SW4=7'b0100100; // S
-										end
-						endcase
-						end
-						
+					case(switch_input)
+						10'b1000000000 : S <= 1; // indicates easy mode
+						10'b0100000000 : S <= 2; // indicates medium mode
+						10'b0010000000 : S <= 3; // indicates hard mode
+					endcase
+					
+					if ( S == 1 ) begin
+						next_state <= s1; 
+						case (clk_counter)
+							5'b00000: begin // cage
+									SW1=7'b0110001; // C
+									SW2=7'b0001000; // A
+									SW3=7'b0000100; // G
+									SW4=7'b0110000; // E
+								end
+							5'b00001: begin // bead
+									SW1=7'b1100000; // B
+									SW2=7'b0110000; // E
+									SW3=7'b0001000; // A
+									SW4=7'b1000010; // D	
+								end
+							5'b00010: begin // edge
+									SW1=7'b0110000; // E
+									SW2=7'b1000010; // D	
+									SW3=7'b0000100; // G
+									SW4=7'b0110000; // E
+								end
+							5'b00011: begin // face
+									SW1=7'b0111000; // F
+									SW2=7'b0001000; // A
+									SW3=7'b0110001; // C
+									SW4=7'b0110000; // E
+								end
+							5'b00100: begin // dead
+									SW1=7'b1000010; // D
+									SW2=7'b0110000; // E
+									SW3=7'b0001000; // A	
+									SW4=7'b1000010; // D	
+								end
+							5'b00101: begin // feed
+									SW1=7'b0111000; // F
+									SW2=7'b0110000; // E	
+									SW3=7'b0110000; // E	
+									SW4=7'b1000010; // D
+								end
+							5'b00110: begin // aced
+									SW1=7'b0001000; // A
+									SW2=7'b0110001; // C
+									SW3=7'b0110000; // E	
+									SW4=7'b1000010; // D
+								end
+							5'b00111: begin // deaf
+									SW1=7'b1000010; // D
+									SW2=7'b0110000; // E
+									SW3=7'b0001000; // A	
+									SW4=7'b0111000; // F
+								end
+							5'b01000: begin // aged
+									SW1=7'b0001000; // A
+									SW2=7'b0000100; // G
+									SW3=7'b0110000; // E	
+									SW4=7'b1000010; // D
+								end
+							5'b01001: begin // fade
+									SW1=7'b0111000; // F
+									SW2=7'b0001000; // A
+									SW3=7'b1000010; // D	
+									SW4=7'b0110000; // E	
+								end
+							5'b01010: begin // deed
+									SW1=7'b1000010; // D
+									SW2=7'b0110000; // E	
+									SW3=7'b0110000; // E	
+									SW4=7'b1000010; // D	
+								end
+							5'b01011: begin // cage
+									SW1=7'b0110001; // C
+									SW2=7'b0001000; // A
+									SW3=7'b0000100; // G
+									SW4=7'b0110000; // E
+								end
+							5'b01100: begin // bead
+									SW1=7'b1100000; // B
+									SW2=7'b0110000; // E
+									SW3=7'b0001000; // A
+									SW4=7'b1000010; // D		
+								end
+							5'b01101: begin // edge 
+									SW1=7'b0110000; // E
+									SW2=7'b1000010; // D	
+									SW3=7'b0000100; // G
+									SW4=7'b0110000; // E											
+								end
+							5'b01110: begin // face
+									SW1=7'b0111000; // F
+									SW2=7'b0001000; // A
+									SW3=7'b0110001; // C
+									SW4=7'b0110000; // E	
+								end
+							5'b01111: begin // dead
+									SW1=7'b1000010; // D
+									SW2=7'b0110000; // E
+									SW3=7'b0001000; // A	
+									SW4=7'b1000010; // D	
+								end
+							5'b10000: begin // feed 
+									SW1=7'b0111000; // F
+									SW2=7'b0110000; // E	
+									SW3=7'b0110000; // E	
+									SW4=7'b1000010; // D
+								end
+							5'b10001: begin // aced
+									SW1=7'b0001000; // A
+									SW2=7'b0110001; // C
+									SW3=7'b0110000; // E	
+									SW4=7'b1000010; // D	
+								end
+							5'b10010: begin // deaf
+									SW1=7'b1000010; // D
+									SW2=7'b0110000; // E
+									SW3=7'b0001000; // A	
+									SW4=7'b0111000; // F
+								end
+							5'b10011: begin // fade 
+									SW1=7'b0111000; // F
+									SW2=7'b0001000; // A
+									SW3=7'b1000010; // D	
+									SW4=7'b0110000; // E	
+								end
+							endcase
+					end else if ( S ==2 ) begin
 						next_state <= s1;
-						
-						end // case s0
+						case (clk_counter)
+							5'b00000: begin // cane
+								SW1=7'b0110001; // C
+								SW2=7'b0001000; // A	
+																					SW3=7'b1101010; // N
+																					SW4=7'b0110000; // E
+																				end
+																	5'b00001: begin // land
+																					SW1=7'b1110001; // L
+																					SW2=7'b0001000; // A	
+																					SW3=7'b1101010; // N
+																					SW4=7'b1000010; // D
+																				end
+																	5'b00010: begin // bean
+																					SW1=7'b1100000; // B
+																					SW2=7'b0110000; // E
+																					SW3=7'b0001000; // A	
+																					SW4=7'b1101010; // N
+																				end
+																	5'b00011: begin // name
+																					SW1=7'b1101010; // N
+																					SW2=7'b0001000; // A	
+																					SW3=7'b1011010; // M
+																					SW4=7'b0110000; // E		
+																				end
+																	5'b00100: begin // made
+																					SW1=7'b1011010; // M
+																					SW2=7'b0001000; // A
+																					SW3=7'b1000010; // D
+																					SW4=7'b0110000; // E			
+																				end
+																	5'b00101: begin // maid
+																					SW1=7'b1011010; // M
+																					SW2=7'b0001000; // A
+																					SW3=7'b1001111; // I
+																					SW4=7'b1000010; // D	
+																				end
+																	5'b00110: begin // lane
+																					SW1=7'b1110001; // L
+																					SW2=7'b0001000; // A	
+																					SW3=7'b1101010; // N
+																					SW4=7'b0110000; // E	
+																				end
+																	5'b00111: begin // hand
+																					SW1=7'b1101000; // H
+																					SW2=7'b0001000; // A	
+																					SW3=7'b1101010; // N
+																					SW4=7'b1000010; // D	
+																				end
+																	5'b01000: begin // main
+																					SW1=7'b1011010; // M
+																					SW2=7'b0001000; // A
+																					SW3=7'b1001111; // I
+																					SW4=7'b1101010; // N			
+																				end
+																	5'b01001: begin // band
+																					SW1=7'b1100000; // B
+																					SW2=7'b0001000; // A
+																					SW3=7'b1101010; // N
+																					SW4=7'b1000010; // D		
+																				end
+																	5'b01010: begin // clan //
+																					SW1=7'b0110001; // C
+																					SW2=7'b1110001; // L
+																					SW3=7'b0001000; // A
+																					SW4=7'b1101010; // N		
+																				end
+																	5'b01011: begin // mail
+																					SW1=7'b1011010; // M
+																					SW2=7'b0001000; // A
+																					SW3=7'b1001111; // I
+																					SW4=7'b1110001; // L
+																				end
+																	5'b01100: begin // mend
+																					SW1=7'b1011010; // M
+																					SW2=7'b0110000; // E	
+																					SW3=7'b1101010; // N
+																					SW4=7'b1000010; // D		
+																				end
+																	5'b01101: begin // film 
+																					SW1=7'b0111000; // F
+																					SW2=7'b1001111; // I
+																					SW3=7'b1110001; // L
+																					SW4=7'b1011010; // M
+																				end
+																	5'b01110: begin // dial
+																					SW1=7'b1000010; // D
+																					SW2=7'b1001111; // I
+																					SW3=7'b0001000; // A
+																					SW4=7'b1110001; // L		
+																				end
+																	5'b01111: begin // need
+																					SW1=7'b1101010; // N
+																					SW2=7'b0110000; // E
+																					SW3=7'b0110000; // E
+																					SW4=7'b1000010; // D
+																				end
+																	5'b10000: begin // nail 
+																					SW1=7'b1101010; // N
+																					SW2=7'b0001000; // A
+																					SW3=7'b1001111; // I
+																					SW4=7'b1110001; // L
+																				end
+																	5'b10001: begin // lima
+																					SW1=7'b1110001; // L
+																					SW2=7'b1001111; // I
+																					SW3=7'b1011010; // M
+																					SW4=7'b0001000; // A		
+																				end
+																	5'b10010: begin // glow
+																					SW1=7'b1110001; // L
+																					SW2=7'b0001000; // A
+																					SW3=7'b1011010; // M
+																					SW4=7'b1100000; // B	
+																				end
+																	5'b10011: begin // bits 
+																					SW3=7'b0000100; // G
+																					SW2=7'b1110001; // L
+																					SW3=7'b0001000; // A
+																					SW4=7'b1011010; // M
+																				end
+																	endcase
+					end else if ( S==3 ) begin
+						next_state <= s1; 
+						case (clk_counter)
+																5'b00000: begin // code
+																	SW1=7'b0110001; // C
+																	SW2=7'b0000001; // O
+																	SW3=7'b1000010; // D
+																	SW4=7'b0110000; // E
+																	end
+																5'b00001: begin // love
+																	SW1=7'b1110001; // L
+																	SW2=7'b0000001; // O
+																	SW3=7'b1101011; // V
+																	SW4=7'b0110000; // E
+																	end
+																5'b00010: begin // flip
+																	SW1=7'b0111000; // F
+																	SW2=7'b1110001; // L
+																	SW3=7'b1001111; // I
+																	SW4=7'b0011000; // P
+																	end
+																5'b00011: begin // flop
+																	SW1=7'b0111000; // F
+																	SW2=7'b1110001; // L
+																	SW3=7'b0000001; // O
+																	SW4=7'b0011000; // P			
+																	end
+																5'b00100: begin // fpga
+																	SW1=7'b0111000; // F
+																	SW2=7'b0011000; // P
+																	SW3=7'b0000100; // G
+																	SW4=7'b0001000; // A		
+																	end
+																5'b00101: begin // blue
+																	SW1=7'b1100000; // B
+																	SW2=7'b1110001; // L
+																	SW3=7'b1000001; // U
+																	SW4=7'b0110000; // E	
+																	end
+																5'b00110: begin // star
+																	SW1=7'b0100100; // S
+																	SW2=7'b1001110; // T
+																	SW3=7'b0001000; // A
+																	SW4=7'b1111010; // R	
+																	end
+																5'b00111: begin // fire
+																	SW1=7'b0111000; // F
+																	SW2=7'b1001111; // I
+																	SW3=7'b1111010; // R
+																	SW4=7'b0110000; // E		
+																	end
+																5'b01000: begin // gold
+																	SW1=7'b0000100; // G
+																	SW2=7'b0000001; // O
+																	SW3=7'b1110001; // L
+																	SW4=7'b1000010; // D		
+																	end
+																5'b01001: begin // wind
+																	SW1=7'b1001001; // W
+																	SW2=7'b1001111; // I
+																	SW3=7'b1101010; // N
+																	SW4=7'b1000010; // D		
+																	end
+																5'b01010: begin // park
+																	SW1=7'b0011000; // P
+																	SW2=7'b0001000; // A
+																	SW3=7'b1111010; // R
+																	SW4=7'b1111000; // K			
+																	end
+																5'b01011: begin // moon
+																	SW1=7'b1011010; // M
+																	SW2=7'b0000001; // O
+																	SW3=7'b0000001; // O
+																	SW4=7'b1101010; // N	
+																	end
+																5'b01100: begin // wave
+																	SW1=7'b1001001; // W
+																	SW2=7'b0001000; // A
+																	SW3=7'b1101011; // V
+																	SW4=7'b0110000; // E		
+																	end
+																5'b01101: begin // book 
+																	SW1=7'b1100000; // B
+																	SW2=7'b0000001; // O
+																	SW3=7'b0000001; // O
+																	SW4=7'b1111000; // K	
+																	end
+																5'b01110: begin // tree
+																	SW1=7'b1001110; // T
+																	SW2=7'b1111010; // R
+																	SW3=7'b0110000; // E
+																	SW4=7'b0110000; // E		
+																	end
+																5'b01111: begin // calm
+																	SW1=7'b0110001; // C
+																	SW2=7'b0001000; // A
+																	SW3=7'b1110001; // L
+																	SW4=7'b1011010; // M
+																	end
+																5'b10000: begin // rain 
+																	SW1=7'b1111010; // R
+																	SW2=7'b0001000; // A
+																	SW3=7'b1001111; // I
+																	SW4=7'b1101010; // N
+																	end
+																5'b10001: begin // brim
+																	SW1=7'b1100000; // B
+																	SW2=7'b1111010; // R
+																	SW3=7'b1001111; // I
+																	SW4=7'b1011010; // M		
+																	end
+																5'b10010: begin // glow
+																	SW1=7'b0000100; // G
+																	SW2=7'b1110001; // L
+																	SW3=7'b0000001; // O
+																	SW4=7'b1001001; // W		
+																	end
+																5'b10011: begin // bits 
+																	SW1=7'b1100000; // B
+																	SW2=7'b1001111; // I
+																	SW3=7'b1001110; // T
+																	SW4=7'b0100100; // S
+																	end
+														endcase
+					end // level if statements
+			
+			end // case s0
 				s1: begin 
 						UG1 <= sevenSegment;
 						next_state <= s2;
@@ -250,20 +504,21 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 						end else if (count == c5)begin
 							next_state <= s8;
 						end
-						end // case
-				s6: begin
+						
 						case (count)
 							c0: next_count <= c1;
 							c1: next_count <= c2;
 							c2: next_count <= c3;
 							c3: next_count <= c4;
 							c4: next_count <= c5;
+							c5: next_count <= c0;
 							default: next_count <= c0;
 						endcase
-						next_state <= s0;
+						
 						end // case
+				s6: next_state <= s1;
 				s7: next_state <= s0;
-				s8: next_state <= s0; 
+				s8: next_state <= s9; 
 				s9: next_state <= s0; 
 			endcase
 		end // b==1 if statement
@@ -273,7 +528,6 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 		reset_old <= reset;
 		
 	end //clk
-	
 	always @*
 		begin
 		  
@@ -292,8 +546,8 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 			10'b0010000001 : sevenSegment = 7'b1000111; // J
 			10'b0001000001 : sevenSegment = 7'b1111000; // K
 			10'b0000100001 : sevenSegment = 7'b1110001; // L
-			10'b0000010001 : sevenSegment = 7'b1101010; // M
-			10'b0000001001 : sevenSegment = 7'b1011010; // N
+			10'b0000010001 : sevenSegment = 7'b1011010; // M
+			10'b0000001001 : sevenSegment = 7'b1101010; // N
 			// multiplier of 2 (010)
 			10'b1000000010 : sevenSegment = 7'b0000001; // O
 			10'b0100000010 : sevenSegment = 7'b0011000; // P
@@ -315,75 +569,34 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 	always @(state) begin
 		case (state)
         s0: begin
-            // SS1 <= 7'b1111111;  
-            // SS2 <= 7'b1111111; 
-            // SS3 <= 7'b1111111;
-            // SS4 <= 7'b1111111;
-				SS1 <= SW1;
-            SS2 <= SW2;
-            SS3 <= SW3;
-            SS4 <= SW4;
-				if (UG1 == SW1) begin 
-					LED1 <= 1;
-				end else begin
-					LED1 <= 0;
-					end
-				
-				if (UG2 == SW2) begin 
-					LED2 <= 1;
-				end else begin
-					LED2 <= 0;
-					end
-				
-				if (UG3 == SW3) begin 
-					LED3 <= 1;
-				end else begin
-					LED3 <= 0;
-					end
-				
-				if (UG4 == SW4) begin 
-					LED4 <= 1;
-				end else begin
-					LED4 <= 0;
-					end
-				case (count)
-						c0: begin 
-								LED7 <= 0;
-								LED8 <= 0;
-								LED9 <= 0; 
-								LED0 <= 0; 
-							end
-						c1: begin 
-								LED7 <= 0;
-								LED8 <= 0;
-								LED9 <= 0; 
-								LED0 <= 1; 
-							end
-						c2: begin 
-								LED7 <= 0;
-								LED8 <= 0;
-								LED9 <= 1; 
-								LED0 <= 1;  
-							end
-						c3: begin 
-								LED7 <= 0;
-								LED8 <= 1;
-								LED9 <= 1; 
-								LED0 <= 1; 
-							end
-						c4: begin 
-								LED7 <= 1;
-								LED8 <= 1;
-								LED9 <= 1; 
-								LED0 <= 1; 
-							end
-						c5: begin 
-								LED7 <= 1;
-								LED8 <= 1;
-								LED9 <= 1; 
-								LED0 <= 1; 
-							end
-					endcase 
+				LED5 <= 0; LED6 <= 0;
+				case(switch_input)
+							// multiplier of 0 (000)
+							10'b1000000000 : begin // easy
+											SS1 = 7'b0110000; // E  
+											SS2 = 7'b0001000; // A
+											SS3 = 7'b0100100; // S
+											SS4 = 7'b1000100; // Y
+										end
+							10'b0100000000 : begin // medium
+											SS1 = 7'b1011010; // M
+											SS2 = 7'b0110000; // E
+											SS3 = 7'b1000010; // D
+											SS4 = 7'b1111111;
+										end
+							10'b0010000000 : begin // cage
+											SS1 = 7'b1101000; // H
+											SS2 = 7'b0001000; // A
+											SS3 = 7'b1111010; // R
+											SS4 = 7'b1000010; // D
+										end
+							default: begin
+										SS1 <= 7'b0100100; // S 
+										SS2 <= 7'b0110000; // E
+										SS3 <= 7'b1110001; // L
+										SS4 <= 7'b0110000; // E
+										end
+						endcase
 				end
         s1: begin 
 				SS1 <= sevenSegment;
@@ -481,17 +694,47 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
 								LED0 <= 1; 
 							end
 					endcase
-					
+					if (UG1 == SW1) begin 
+						LED1 <= 1;
+					end else begin
+						LED1 <= 0;
+					end
+							
+					if (UG2 == SW2) begin 
+						LED2 <= 1;
+					end else begin
+						LED2 <= 0;
+					end
+							
+					if (UG3 == SW3) begin 
+								LED3 <= 1;
+					end else begin
+						LED3 <= 0;
+					end
+						
+					if (UG4 == SW4) begin 
+						LED4 <= 1;
+					end else begin
+						LED4 <= 0;
+					end 
 				end
         s7: begin
             SS1 <= 7'b1001001; // W
             SS2 <= 7'b1001111; // I
-            SS3 <= 7'b1011010; // N
+            SS3 <= 7'b1101010; // N
             SS4 <= 7'b0100100; // S
 				
 				// Flash LEDs
-            LED5 <= slow_clk;
-            LED6 <= slow_clk; 
+            LED1 <= slow_clk;
+            LED2 <= slow_clk; 
+				LED3 <= slow_clk;
+            LED4 <= slow_clk;
+				LED5 <= slow_clk;
+            LED6 <= slow_clk;
+				LED7 <= slow_clk;
+            LED8 <= slow_clk;
+				LED9 <= slow_clk;
+            LED0 <= slow_clk;
 				
 				end
         s8: begin
@@ -499,6 +742,11 @@ module wordle(switch_input, clk, enter, SS1, SS2, SS3, SS4, LED1, LED2, LED3, LE
             SS2 <= 7'b0000001; // O
             SS3 <= 7'b0100100; // S
             SS4 <= 7'b0110000; // E
+				
+				LED7 <= 0;
+            LED8 <= 0; 
+				LED9 <= 0;
+            LED0 <= 0; 
 				end
        s9: begin
             SS1 <= SW1;
